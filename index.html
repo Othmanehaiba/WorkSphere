@@ -3,61 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="Workspace , Virtual Workspace , " />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="keywords" content="Workspace, Virtual Workspace" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Virtual Workspace</title>
   </head>
-  <body class="">
-    <section>
-      <form action="" class="bg-zinc-700 w-lg h-lg">
-        <button class="ml-[150px] mr-[150px]">Submit</button><br /><br />
-        <div class="ml-[150px] mr-[150px]">
-            <label for="">Enter your FullName</label>
+  <body class="flex min-h-screen">
+    <section class="flex items-center justify-center bg-zinc-800 p-8">
+      <form class="bg-zinc-700 rounded-lg shadow-xl p-8 w-96">
+        <h2 class="text-white text-2xl font-bold mb-6 text-center">Add a Worker</h2>
+        
+        <div class="mb-4">
+          <label class="block text-white mb-2" for="name">Enter your Full Name</label>
           <input
-            class="input bg-blue-500 mx-auto"
+            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
             type="text"
-            name=""
             id="name"
             placeholder="Ex: Othmane Haiba"
-          /><br /><br />
+          />
         </div>
-        <div class="ml-[150px] mr-[150px]">
-            <label for="">Enter your role</label>
+        
+        <div class="mb-4">
+          <label class="block text-white mb-2" for="role">Enter your Role</label>
           <input
-            class="input bg-blue-500 mx-auto"
+            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
             type="text"
-            name=""
             id="role"
             placeholder="Ex: IT Guy"
-          /><br /><br />
+          />
         </div>
-        <div class="ml-[150px] mr-[150px]">
-            <label for="">Enter your Email</label>
+        
+        <div class="mb-4">
+          <label class="block text-white mb-2" for="email">Enter your Email</label>
           <input
-            class="input bg-blue-500 mx-auto"
-            type="text"
-            name=""
+            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+            type="email"
             id="email"
             placeholder="Ex: othmanehaiba4@gmail.com"
-          /><br /><br />
+          />
         </div>
-        <div class="ml-[150px] mr-[150px]">
-            <label for="">Enter your Phone Number</label>
+        
+        <div class="mb-6">
+          <label class="block text-white mb-2" for="tele">Enter your Phone</label>
           <input
-            class="input bg-blue-500 mx-auto"
-            type="number"
-            name=""
+            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+            type="tel"
             id="tele"
             placeholder="Ex: 0612345678"
-          /><br /><br />
+          />
         </div>
+        
+        <button 
+          type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded"
+        >
+          Submit
+        </button>
       </form>
     </section>
+    
+    <!-- Workspace Background Section -->
     <section class="workspace">
-      <div
-        class="relative grid-cols-[38%_17%_22%_22%] grid-rows-[33.5%_32%_32.5%]"
-      ></div>
+        <h1>hello</h1>
     </section>
   </body>
 </html>
