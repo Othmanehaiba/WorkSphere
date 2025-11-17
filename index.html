@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="Workspace, Virtual Workspace" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Virtual Workspace</title>
   </head>
   <body class="flex min-h-screen">
@@ -73,14 +74,19 @@
 
     <!-- Workspace Background Section -->
     <section class="workspace relative">
-      <img src="image/virtual_workSpace.jpg" alt="" />
-      <div
-        class="absolute top-0 left-0 w-full h-full grid grid-cols-[38%_17%_22%_22%] grid-rows-[33.5%_32%_32.5%]"
-      >
-      <div class="">
-
+      <img
+        src="image/virtual_workSpace.jpg"
+        alt=""
+        class="min-h-screen w-full"
+      />
+      <div class="chambers absolute top-0 left-0 w-full h-full">
+        <div class="conférence bg-green-600/50"></div>
+        <div class="serveurs bg-yellow-600/50"></div>
+        <div class="security bg-red-600/50"></div>
+        <div class="reception bg-blue-600/50"></div>
+        <div class="personel bg-green-600/50"></div>
+        <div class="archive bg-gray-600/50"></div>
       </div>
-    </div>
     </section>
   </body>
 </html>
