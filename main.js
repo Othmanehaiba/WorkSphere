@@ -36,18 +36,13 @@ let employees = [
         Edate: 2024,
       },
     ],
-  }
+  },
 ];
 
-// let Employe = {
-//   id: 0,
-//   FullName: "",
-//   Role: "",
-//   PicURL: "",
-//   Email: "",
-//   Phone: 0,
-//   Experiences: [{ PPost: "", PEntreprise: "", SDate: 0, Edate: 0 }],
-// };
+picture.addEventListener("input", () => {
+  const img = document.querySelector("#realPic");
+  img.src = picture.value;
+});
 
 btnAddWorker.addEventListener("click", () => {
   pop_up.classList.remove("hidden");
@@ -112,10 +107,8 @@ submit.addEventListener("click", (e) => {
   employe.Phone = phone.value;
   employe.Experiences = [];
 
-
-
   document.querySelectorAll(".exp").forEach((e) => {
-    let exp = {}
+    let exp = {};
     const post = e.target.getElementById("post");
     const entreprise = e.target.getElementById("entreprise");
     const dateDebut = e.target.getElementById("start_date");
@@ -130,19 +123,42 @@ submit.addEventListener("click", (e) => {
   });
 
   employees.push(employe);
-  const container_cards = document.querySelector('.container_cards');
+  const container_cards = document.querySelector(".container_cards");
   const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
+  card.classList.add("card");
+  card.dataset.id = employees.length - 1;
+  card.innerHTML = `
         <div class="card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400">
         <img
-              src="image/d97bbb08017ac2309307f0822e63d082.jpg"
+              src="${picture.value}"
               alt="user_by_default"
-              class="w-[40px] h-[40px] rounded-3xl"
+              class=" rounded-full"
             />
           <h3>${fullName.value}</h3>
         </div>`;
-        container_cards.append(card)
-  pop_up.classList.add('hidden');
-  
+  container_cards.append(card);
+  pop_up.classList.add("hidden");
+
+  //   const cards = document.querySelectorAll('.card');
+  card.addEventListener("click", (e) => {
+  const id = e.target.closest(".card").dataset.id;
+
+    console.log(e.target.closest(".card") , id);
+    
+
+    console.log("clicked");
+    const countain = document.querySelector(".details");
+    const details = document.createElement("div");
+    details.className = "detail";
+    details.innerHTML = `
+          <img src="${employees[id].PicURL} class="w-24 h-24">  
+          <h3><b>FullName :</b>${employees[id].FullName}</h3>
+          <p><b>Role :</b>${employees.Role}</p>
+          <p><b> :</b>${employees.PicURL}</p>
+          <p><b>Role :</b>${employees.Role}</p>
+          <p><b>Role :</b>${employees.Role}</p>
+
+        `;
+    countain.append(details);
+  });
 });
