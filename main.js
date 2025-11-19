@@ -3,7 +3,20 @@ const pop_up = document.querySelector(".pop_up");
 const btnAddExperience = document.getElementById("experience");
 const closePopUp = document.getElementById("X");
 const exp = document.querySelector(".Exp");
+const submit = document.getElementById('submit');
+const fullName = document.getElementById('name');
+const role = document.getElementById('role');
+const picture = document.getElementById('pic');
+const email = document.getElementById('email');
+const phone = document.getElementById('tele');
+const post = document.getElementById('post');
+const entreprise = document.getElementById('entreprise');
+const dateDebut = document.getElementById('start_date');
+const dateFin = document.getElementById('end_date');
+
+
 let Employe = {
+  id: 0,  
   FullName: "",
   role: "",
   picURL: "",
@@ -41,7 +54,7 @@ btnAddExperience.addEventListener("click", (e) => {
             <input
               class="w-full px-4 py-2 rounded bg-zinc-600 text-white w-80 mx-[25%]"
               type="text"
-              id="post"
+              id="entreprise"
               placeholder="Ex: Microsoft "
             />
             <label class="block text-white mb-2 mx-[25%]" for="tele"
@@ -61,3 +74,8 @@ btnAddExperience.addEventListener("click", (e) => {
               id="end_date"
             />`;
 });
+submit.addEventListener('click' , () => {
+    Employe.forEach((E,index) => {
+        
+    });
+})
