@@ -21,3 +21,6 @@
 .archive {
   grid-area: 3 / 4 / 4 / 5;
 }
+.pop_up{
+  z-index: 1;
+}
