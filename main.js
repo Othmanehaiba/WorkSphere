@@ -16,24 +16,24 @@ let manyExp = 0;
 
 let employees = [
   {
-    id: 1,
-    FullName: "Othmane Haiba",
-    Role: "IT Guy",
-    PicURL: "https://example.com/othmane.jpg",
-    Email: "othmanehaiba4@gmail.com",
-    Phone: 612345678,
+    id: 0,
+    FullName: "",
+    Role: "",
+    PicURL: "",
+    Email: "",
+    Phone: 0,
     Experiences: [
       {
-        PPost: "Junior Developer",
-        PEntreprise: "Tech Solutions",
-        SDate: 2020,
-        Edate: 2022,
+        PPost: "",
+        PEntreprise: "",
+        SDate: 0,
+        Edate: 0,
       },
       {
-        PPost: "Senior Developer",
-        PEntreprise: "Digital Corp",
-        SDate: 2022,
-        Edate: 2024,
+        PPost: "",
+        PEntreprise: "",
+        SDate: 0,
+        Edate: 0,
       },
     ],
   },
@@ -47,9 +47,12 @@ picture.addEventListener("input", () => {
 btnAddWorker.addEventListener("click", () => {
   pop_up.classList.remove("hidden");
 });
+
 closePopUp.addEventListener("click", () => {
   pop_up.classList.add("hidden");
+  document.querySelector("form").reset();
 });
+
 btnAddExperience.addEventListener("click", (e) => {
   e.preventDefault();
   exps.innerHTML += `<div class="exp bg-gray-400 rounded mb-4">
@@ -120,6 +123,7 @@ submit.addEventListener("click", (e) => {
     exp.Edate = dateFin.value;
 
     employe.Experiences.push(exp);
+    document.querySelector('form').reset()
   });
 
   employees.push(employe);
@@ -134,31 +138,39 @@ submit.addEventListener("click", (e) => {
               alt="user_by_default"
               class=" rounded-full"
             />
-          <h3>${fullName.value}</h3>
+          <div>
+          <h3 class="text-2xl">${fullName.value}</h3> 
+          <h4>${role.value}</h4>
+          </div>  
         </div>`;
   container_cards.append(card);
   pop_up.classList.add("hidden");
 
   //   const cards = document.querySelectorAll('.card');
   card.addEventListener("click", (e) => {
-  const id = e.target.closest(".card").dataset.id;
+    const id = e.target.closest(".card").dataset.id;
 
-    console.log(e.target.closest(".card") , id);
-    
-
-    console.log("clicked");
     const countain = document.querySelector(".details");
-    const details = document.createElement("div");
-    details.className = "detail";
-    details.innerHTML = `
-          <img src="${employees[id].PicURL} class="w-24 h-24">  
-          <h3><b>FullName :</b>${employees[id].FullName}</h3>
-          <p><b>Role :</b>${employees.Role}</p>
-          <p><b> :</b>${employees.PicURL}</p>
-          <p><b>Role :</b>${employees.Role}</p>
-          <p><b>Role :</b>${employees.Role}</p>
+    countain.classList.remove("hidden");
+    countain.innerHTML = "";
 
-        `;
-    countain.append(details);
+    const details = document.createElement("div");
+    details.innerHTML = `
+    <button
+            type="button"
+            class="text-red-500 items-end ml-[100%] font-bold"
+            id="closePopUp">X</button>
+    <img src="${employees[id].PicURL}" class="w-auto h-auto rounded-full"> 
+
+    <h3><b>FullName :</b> ${employees[id].FullName}</h3>
+    <p><b>Role :</b> ${employees[id].Role}</p>
+    <p><b>Email :</b> ${employees[id].Email}</p>
+    <p><b>Phone :</b> ${employees[id].Phone}</p>
+  `;
+
+    countain.appendChild(details);
+    document.getElementById("closePopUp").addEventListener("click", () => {
+      document.querySelector(".details").classList.add("hidden");
+    });
   });
 });
