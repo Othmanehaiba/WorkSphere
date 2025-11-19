@@ -18,5 +18,7 @@ let Employe = {
 btnAddWorker.addEventListener("click", () => {
   pop_up.classList.remove("hidden");
 });
-
+closePopUp.addEventListener("click", () => {
+  pop_up.classList.add("hidden");
+});
 
