@@ -8,110 +8,165 @@
     <link rel="stylesheet" href="style.css" />
     <title>Virtual Workspace</title>
   </head>
-  <body class="flex min-h-screen">
-    <section class="flex items-center justify-center bg-zinc-800 p-8">
-      <form class="bg-zinc-700 rounded-lg shadow-xl p-8 w-96">
-        <h2 class="text-white text-2xl font-bold mb-6 text-center">
-          Add a Worker
-        </h2>
-
-        <div class="mb-4">
-          <label class="block text-white mb-2" for="name"
-            >Enter your Full Name</label
-          >
-          <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
-            type="text"
-            id="name"
-            placeholder="Ex: Othmane Haiba"
-          />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-white mb-2" for="role"
-            >Enter your Role</label
-          >
-          <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
-            type="text"
-            id="role"
-            placeholder="Ex: IT Guy"
-          />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-white mb-2" for="image"
-            >Enter your Role</label
-          >
-          <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
-            type="text"
-            id="pic"
-            placeholder="Pic's URL"
-          />
-          <!-- <img src="image/d97bbb08017ac2309307f0822e63d082.jpg" alt="user_by_default" class="w-auto h-auto"> -->
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-white mb-2" for="email"
-            >Enter your Email</label
-          >
-          <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
-            type="email"
-            id="email"
-            placeholder="Ex: othmanehaiba4@gmail.com"
-          />
-        </div>
-
-        <div class="mb-6">
-          <label class="block text-white mb-2" for="tele"
-            >Enter your Phone</label
-          >
-          <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
-            type="tel"
-            id="tele"
-            placeholder="Ex: 0612345678"
-          />
-        </div>
-
-        <button
-          type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded"
-        >
-          Submit
-        </button>
-      </form>
-    </section>
+  <body class="flex min-h-screen relative">
+    <aside class="side bg-zinc-800 w-[50vh] max-h-screen overflow-y-auto">
+      <button
+        class="text-white mx-32 bg-blue-600 w-32 p-2 rounded hover:bg-blue-800 mt-6"
+        id="addWorker"
+      >
+        Add a Worker
+      </button>
+      <div class="container_cards"></div>
+    </aside>
 
     <!-- Workspace Background Section -->
-    <section class="workspace relative">
+    <main class="workspace relative">
       <img
         src="image/virtual_workSpace.jpg"
         alt=""
         class="min-h-screen w-full"
       />
       <div class="chambers absolute top-0 left-0 w-full h-full">
-        <div class="conférence bg-green-600/50 flex justify-center items-center">
-          <button class="bg-blue-600 h-auto w-auto">+</button>
+        <div
+          class="conférence bg-green-600/50 flex flex-col gap-4 justify-center items-center"
+        >
+          <h3 class="text-lg">Conférence Room</h3>
+          <button class="ajouter bg-blue-600 h-auto w-4 text-white">+</button>
         </div>
-        <div class="serveurs bg-yellow-600/50 flex justify-center items-center">
-            <button class="bg-blue-600 h-auto w-auto">+</button>
+        <div
+          class="serveurs bg-yellow-600/50 flex flex-col justify-center items-center"
+        >
+          <h3 class="text-lg">Conférence Room</h3>
+          <button class="ajouter bg-blue-600 h-auto w-4 text-white">+</button>
         </div>
-        <div class="security bg-red-600/50 flex justify-center items-center">
-            <button class="bg-blue-600 h-auto w-auto">+</button>
+        <div
+          class="security bg-red-600/50 flex flex-col justify-center items-center"
+        >
+          <h3 class="text-lg">Conférence Room</h3>
+          <button class="ajouter bg-blue-600 h-auto w-4 text-white">+</button>
         </div>
-        <div class="reception bg-blue-600/50 flex justify-center items-center">
-            <button class="bg-blue-600 h-auto w-auto">+</button>
+        <div
+          class="reception bg-blue-600/50 flex flex-col justify-center items-center"
+        >
+          <h3 class="text-lg">Conférence Room</h3>
+          <button class="ajouter bg-blue-600 h-auto w-4 text-white">+</button>
         </div>
-        <div class="personel bg-green-600/50 flex justify-center items-center">
-            <button class="bg-blue-600 h-auto w-auto">+</button>
+        <div
+          class="personel bg-green-600/50 flex flex-col justify-center items-center"
+        >
+          <h3 class="text-lg">Conférence Room</h3>
+          <button class="ajouter bg-blue-600 h-auto w-4 text-white">+</button>
         </div>
-        <div class="archive bg-gray-600/50 flex justify-center items-center">
-            <button class="bg-blue-600 h-auto w-auto">+</button>
+        <div
+          class="archive bg-gray-600/50 flex flex-col justify-center items-center"
+        >
+          <h3 class="text-lg">Conférence Room</h3>
+          <button class="ajouter bg-blue-600 h-auto w-4 text-white">+</button>
         </div>
       </div>
-    </section>
+      <div
+        class="pop_up absolute inset-0 flex items-center justify-center hidden"
+      >
+        <form
+          class="form bg-zinc-700 rounded-lg shadow-xl p-8 w-[50%] h-[80vh] overflow-y-auto"
+        >
+          <button
+            type="button"
+            class="text-red-500 items-end ml-[100%] font-bold"
+            id="X"
+          >
+            X
+          </button>
+          <h2 class="text-white text-2xl font-bold mb-6 text-center">
+            Add a Worker
+          </h2>
+
+          <div class="mb-4">
+            <label class="block text-white mb-2" for="name"
+              >Enter your Full Name</label
+            >
+            <input
+              class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+              type="text"
+              id="name"
+              placeholder="Ex: Othmane Haiba"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-white mb-2" for="role"
+              >Enter your Role</label
+            >
+            <input
+              class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+              type="text"
+              id="role"
+              placeholder="Ex: IT Guy"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-white mb-2" for="image"
+              >Enter your Picture</label
+            >
+            <input
+              class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+              type="text"
+              id="pic"
+              placeholder="Pic's URL"
+            /><br />
+            <img
+              src="image/d97bbb08017ac2309307f0822e63d082.jpg"
+              alt="user_by_default"
+              class="rounded-full w-24 h-24 mt-4"
+              id="realPic"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-white mb-2" for="email"
+              >Enter your Email</label
+            >
+            <input
+              class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+              type="email"
+              id="email"
+              placeholder="Ex: othmanehaiba4@gmail.com"
+            />
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-white mb-2" for="tele"
+              >Enter your Phone</label
+            >
+            <input
+              class="w-full px-4 py-2 rounded bg-zinc-600 text-white"
+              type="tel"
+              id="tele"
+              placeholder="Ex: 0612345678"
+            />
+          </div>
+          <button
+            class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 mb-4 rounded"
+            id="experience"
+          >
+            Add Experience
+          </button>
+          <div class="experiences"></div>
+          <!-- <div class="Exp bg-gray-400 rounded mb-4"></div> -->
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded"
+            id="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div
+        class="details absolute inset-0 rounded-xl bg-stone-500 mx-[50%] my-[25%] w-auto h-auto"
+      ></div>
+    </main>
+    <script src="main.js"></script>
   </body>
 </html>
