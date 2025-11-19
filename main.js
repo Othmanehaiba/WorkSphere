@@ -15,6 +15,8 @@ let Employe = {
                 Edate: 0}]
 };
 
-
+btnAddWorker.addEventListener("click", () => {
+  pop_up.classList.remove("hidden");
+});
 
 
