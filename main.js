@@ -134,10 +134,15 @@ submit.addEventListener("click", (e) => {
   const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
-        <div class="card-info bg-gray-400">
+        <div class="card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400">
+        <img
+              src="image/d97bbb08017ac2309307f0822e63d082.jpg"
+              alt="user_by_default"
+              class="w-[40px] h-[40px] rounded-3xl"
+            />
           <h3>${fullName.value}</h3>
         </div>`;
         container_cards.append(card)
+  pop_up.classList.add('hidden');
   
-  form.reset();
 });
