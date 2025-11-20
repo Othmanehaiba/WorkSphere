@@ -11,33 +11,26 @@ const role = document.getElementById("role");
 const picture = document.getElementById("pic");
 const email = document.getElementById("email");
 const phone = document.getElementById("tele");
-
+const addConferance = document.getElementById("conférenceBtn");
+const addReception = document.getElementById("receptionBtn");
+const addSecurity = document.getElementById("securityBtn");
+const addArchieve = document.getElementById("archiveBtn");
+const addPersonal = document.getElementById("personelBtn");
+const addServeurs = document.getElementById("serveursBtn");
+const listAvelaible = document.querySelector('.list_availeble');
+const closeListAv = document.querySelector('.closePopup');
+let room = null;
 let manyExp = 0;
 
-let employees = [
-  {
-    id: 0,
-    FullName: "",
-    Role: "",
-    PicURL: "",
-    Email: "",
-    Phone: 0,
-    Experiences: [
-      {
-        PPost: "",
-        PEntreprise: "",
-        SDate: 0,
-        Edate: 0,
-      },
-      {
-        PPost: "",
-        PEntreprise: "",
-        SDate: 0,
-        Edate: 0,
-      },
-    ],
-  },
-];
+const zoneAcces = {
+      conference: ["Manager", "Réceptionnistes", "Techniciens IT", "Agents de sécurité", "Nettoyage", "Autres rôles"],
+      personnel: ["Manager", "Réceptionnistes", "Techniciens IT", "Agents de sécurité", "Nettoyage", "Autres rôles"],
+      servers: ["Techniciens IT", "Manager", "Nettoyage"],
+      security: ["Agents de sécurité", "Manager", "Nettoyage"],
+      Réception: ["Réceptionnistes", "Manager", "Nettoyage"],
+      archive: ["Manager"]
+  };
+let employees = [];
 
 picture.addEventListener("input", () => {
   const img = document.querySelector("#realPic");
@@ -50,7 +43,7 @@ btnAddWorker.addEventListener("click", () => {
 
 closePopUp.addEventListener("click", () => {
   pop_up.classList.add("hidden");
-  document.querySelector("form").reset();
+  document.querySelector(".form").reset();
 });
 
 btnAddExperience.addEventListener("click", (e) => {
@@ -123,7 +116,7 @@ submit.addEventListener("click", (e) => {
     exp.Edate = dateFin.value;
 
     employe.Experiences.push(exp);
-    document.querySelector('form').reset()
+    document.querySelector("form").reset();
   });
 
   employees.push(employe);
@@ -173,4 +166,18 @@ submit.addEventListener("click", (e) => {
       document.querySelector(".details").classList.add("hidden");
     });
   });
+});
+addConferance.addEventListener("click", () => {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, i) => {
+    if (zoneAcces["conference"].includes(employees[i].Role)) {
+        const list = document.createElement('div');
+        list.append(card);
+        listAvelaible.appendChild(list);
+        listAvelaible.classList.remove("hidden");
+    }
+  });
+  closeListAv.addEventListener('click' , () => {
+    listAvelaible.classList.add("hidden");
+  })
 });
