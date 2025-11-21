@@ -22,6 +22,8 @@ const closeListAv = document.querySelector('.closePopup');
 let room = null;
 let manyExp = 0;
 
+const addToChambre = document.querySelectorAll('.ajouter');
+
 const zoneAcces = {
       conference: ["Manager", "Réceptionnistes", "Techniciens IT", "Agents de sécurité", "Nettoyage", "Autres rôles"],
       personnel: ["Manager", "Réceptionnistes", "Techniciens IT", "Agents de sécurité", "Nettoyage", "Autres rôles"],
@@ -94,14 +96,16 @@ console.log(manyExp);
 submit.addEventListener("click", (e) => {
   e.preventDefault();
 
-  let employe = {};
+  let employe = {
+  FullName : fullName.value,
+  Role : role.value,
+  PicURL : picture.value,
+  Email : email.value,
+  Phone : phone.value,
+  Experiences : Experiences,
+  currRoom: "unasigned"
+  };
 
-  employe.FullName = fullName.value;
-  employe.Role = role.value;
-  employe.PicURL = picture.value;
-  employe.Email = email.value;
-  employe.Phone = phone.value;
-  employe.Experiences = [];
 
   document.querySelectorAll(".exp").forEach((e) => {
     let exp = {};
@@ -167,17 +171,15 @@ submit.addEventListener("click", (e) => {
     });
   });
 });
-addConferance.addEventListener("click", () => {
-  const cards = document.querySelectorAll(".card");
-  cards.forEach((card, i) => {
-    if (zoneAcces["conference"].includes(employees[i].Role)) {
-        const list = document.createElement('div');
-        list.append(card);
-        listAvelaible.appendChild(list);
-        listAvelaible.classList.remove("hidden");
-    }
-  });
-  closeListAv.addEventListener('click' , () => {
-    listAvelaible.classList.add("hidden");
+
+addToChambre.forEach((add) =>{
+  add.addEventListener('click', () => {
+    let availble = [];
+    employees.forEach(emp => {
+      if(emp.availble === "unasigned"){
+        availble.push(emp);
+      }
+
+    });
   })
-});
+})
