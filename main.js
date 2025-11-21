@@ -17,21 +17,36 @@ const addSecurity = document.getElementById("securityBtn");
 const addArchieve = document.getElementById("archiveBtn");
 const addPersonal = document.getElementById("personelBtn");
 const addServeurs = document.getElementById("serveursBtn");
-const listAvelaible = document.querySelector('.list_availeble');
-const closeListAv = document.querySelector('.closePopup');
+const listAvelaible = document.querySelector(".list_availeble");
+const closeListAv = document.querySelector(".closePopup");
+const staffContainer = document.querySelector('#staffContainer')
 let room = null;
 let manyExp = 0;
 
-const addToChambre = document.querySelectorAll('.ajouter');
+const addToChambre = document.querySelectorAll(".ajouter");
 
 const zoneAcces = {
-      conference: ["Manager", "Réceptionnistes", "Techniciens IT", "Agents de sécurité", "Nettoyage", "Autres rôles"],
-      personnel: ["Manager", "Réceptionnistes", "Techniciens IT", "Agents de sécurité", "Nettoyage", "Autres rôles"],
-      servers: ["Techniciens IT", "Manager", "Nettoyage"],
-      security: ["Agents de sécurité", "Manager", "Nettoyage"],
-      Réception: ["Réceptionnistes", "Manager", "Nettoyage"],
-      archive: ["Manager"]
-  };
+  conference: [
+    "Manager",
+    "Réceptionnistes",
+    "Techniciens IT",
+    "Agents de sécurité",
+    "Nettoyage",
+    "Autres rôles",
+  ],
+  personnel: [
+    "Manager",
+    "Réceptionnistes",
+    "Techniciens IT",
+    "Agents de sécurité",
+    "Nettoyage",
+    "Autres rôles",
+  ],
+  servers: ["Techniciens IT", "Manager", "Nettoyage"],
+  security: ["Agents de sécurité", "Manager", "Nettoyage"],
+  Réception: ["Réceptionnistes", "Manager", "Nettoyage"],
+  archive: ["Manager"],
+};
 let employees = [];
 
 picture.addEventListener("input", () => {
@@ -97,15 +112,14 @@ submit.addEventListener("click", (e) => {
   e.preventDefault();
 
   let employe = {
-  FullName : fullName.value,
-  Role : role.value,
-  PicURL : picture.value,
-  Email : email.value,
-  Phone : phone.value,
-  Experiences : Experiences,
-  currRoom: "unasigned"
+    FullName: fullName.value,
+    Role: role.value,
+    PicURL: picture.value,
+    Email: email.value,
+    Phone: phone.value,
+    Experiences: [],
+    currRoom: "unasigned",
   };
-
 
   document.querySelectorAll(".exp").forEach((e) => {
     let exp = {};
@@ -171,15 +185,73 @@ submit.addEventListener("click", (e) => {
     });
   });
 });
+function isAvaileble(availble, room, indxRoom) {
+  let filtredArray = [];
 
-addToChambre.forEach((add) =>{
-  add.addEventListener('click', () => {
+  if (room === "conf" || room === "per") {
+    filtredArray.push(...availble);
+  }
+  if (room === "ser") {
+    filtredArray = filterArray(availble, "Techniciens IT");
+    filtredArray.push(...filterArray(availble, "Manager"));
+    filtredArray.push(...filterArray(availble, "Nettoyage"));
+  }
+  if (room === "sec") {
+    filtredArray = filterArray(availble, "Agents de sécurité");
+    filtredArray.push(...filterArray(availble, "Manager"));
+    filtredArray.push(...filterArray(availble, "Nettoyage"));
+  }
+  if (room === "res") {
+    filtredArray = filterArray(availble, "Réceptionnistes");
+    filtredArray.push(...filterArray(availble, "Manager"));
+    filtredArray.push(...filterArray(availble, "Nettoyage"));
+  }
+  if (room === "arch") {
+    filtredArray = filterArray(availble, "Manager");
+  }
+  const showUnassigned = document.createElement("div");
+  showUnassigned.className =
+    "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400";
+  filtredArray.forEach(fil =>{
+    showUnassigned.innerHTML = `
+        <img
+              src="${picture.value}"
+              alt="user_by_default"
+              class=" rounded-full"
+            />
+          <div>
+          <h3 class="text-2xl">${fullName.value}</h3> 
+          <h4>${role.value}</h4>
+          </div>  
+        
+    `
+  })  
+}
+addToChambre.forEach((add) => {
+  add.addEventListener("click", () => {
     let availble = [];
-    employees.forEach(emp => {
-      if(emp.availble === "unasigned"){
+    employees.forEach((emp) => {
+      if (emp.availble === "unasigned") {
         availble.push(emp);
       }
-
     });
-  })
-})
+    if (add.classList.contains("conférence")) {
+      isAvaileble(availble, "conf", 1);
+    }
+    if (add.classList.contains("serveurs")) {
+      isAvaileble(availble, "ser", 2);
+    }
+    if (add.classList.contains("security")) {
+      isAvaileble(availble, "sec", 3);
+    }
+    if (add.classList.contains("reception")) {
+      isAvaileble(availble, "res", 4);
+    }
+    if (add.classList.contains("personel")) {
+      isAvaileble(availble, "pers", 5);
+    }
+    if (add.classList.contains("archive")) {
+      isAvaileble(availble, "arch", 6);
+    }
+  });
+});
