@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="Workspace, Virtual Workspace" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="style.css" />
     <title>Virtual Workspace</title>
   </head>
@@ -32,7 +32,7 @@
         >
           <h3 class="text-lg">Conférence Room</h3>
           <button
-            class="ajouter bg-blue-600 h-auto w-4 text-white"
+            class="ajouter conférence bg-blue-600 h-auto w-4 text-white"
             id="conférenceBtn"
           >
             +
@@ -43,7 +43,7 @@
         >
           <h3 class="text-lg">Serveurs Room</h3>
           <button
-            class="ajouter bg-blue-600 h-auto w-4 text-white"
+            class="ajouter serveurs bg-blue-600 h-auto w-4 text-white"
             id="serveursBtn"
           >
             +
@@ -54,7 +54,7 @@
         >
           <h3 class="text-lg">Security Room</h3>
           <button
-            class="ajouter bg-blue-600 h-auto w-4 text-white"
+            class="ajouter security bg-blue-600 h-auto w-4 text-white"
             id="securityBtn"
           >
             +
@@ -65,7 +65,7 @@
         >
           <h3 class="text-lg">Reciption Room</h3>
           <button
-            class="ajouter bg-blue-600 h-auto w-4 text-white"
+            class="ajouter reception bg-blue-600 h-auto w-4 text-white"
             id="receptionBtn"
           >
             +
@@ -75,7 +75,7 @@
           class="personel bg-green-600/50 flex flex-col justify-center items-center"
         >
           <h3 class="text-lg">Staff Room</h3>
-          <button class="bg-blue-600 h-auto w-4 text-white" id="personelBtn">
+          <button class="ajouter personel bg-blue-600 h-auto w-4 text-white" id="personelBtn">
             +
           </button>
         </div>
@@ -83,7 +83,7 @@
           class="archive bg-gray-600/50 flex flex-col justify-center items-center"
         >
           <h3 class="text-lg">Archive Room</h3>
-          <button class="bg-blue-600 h-auto w-4 text-white" id="archiveBtn">
+          <button class="ajouter archive bg-blue-600 h-auto w-4 text-white" id="archiveBtn">
             +
           </button>
         </div>
@@ -205,6 +205,9 @@
           </button>
         </form>
       </div>
+      <div class="msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md  shadow-red-600 shadow-lg text-center font-semibold animate-bounce hidden">
+                No employee is allowed to enter this room!
+            </div>
     </main>
     <script src="main.js"></script>
   </body>

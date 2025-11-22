@@ -3,7 +3,7 @@ const pop_up = document.querySelector(".pop_up");
 const btnAddExperience = document.getElementById("experience");
 const closePopUp = document.getElementById("X");
 const exps = document.querySelector(".experiences");
-const form = document.querySelectorAll(".form");
+const form = document.querySelector("form");
 const side = document.querySelector(".side");
 const submit = document.getElementById("submit");
 const fullName = document.getElementById("name");
@@ -19,7 +19,8 @@ const addPersonal = document.getElementById("personelBtn");
 const addServeurs = document.getElementById("serveursBtn");
 const listAvelaible = document.querySelector(".list_availeble");
 const closeListAv = document.querySelector(".closePopup");
-const staffContainer = document.querySelector('#staffContainer')
+const staffContainer = document.querySelector("#staffContainer");
+
 let room = null;
 let manyExp = 0;
 
@@ -51,7 +52,11 @@ let employees = [];
 
 picture.addEventListener("input", () => {
   const img = document.querySelector("#realPic");
-  img.src = picture.value;
+  if (!picture) {
+    img.src = "image/d97bbb08017ac2309307f0822e63d082.jpg";
+  } else {
+    img.src = picture.value;
+  }
 });
 
 btnAddWorker.addEventListener("click", () => {
@@ -106,7 +111,6 @@ btnAddExperience.addEventListener("click", (e) => {
               />
               </div>`;
 });
-console.log(manyExp);
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
@@ -120,6 +124,7 @@ submit.addEventListener("click", (e) => {
     Experiences: [],
     currRoom: "unasigned",
   };
+  console.log(employe.Role);
 
   document.querySelectorAll(".exp").forEach((e) => {
     let exp = {};
@@ -134,7 +139,7 @@ submit.addEventListener("click", (e) => {
     exp.Edate = dateFin.value;
 
     employe.Experiences.push(exp);
-    document.querySelector("form").reset();
+    // document.querySelector("form").reset();
   });
 
   employees.push(employe);
@@ -156,6 +161,7 @@ submit.addEventListener("click", (e) => {
         </div>`;
   container_cards.append(card);
   pop_up.classList.add("hidden");
+  form.reset();
 
   //   const cards = document.querySelectorAll('.card');
   card.addEventListener("click", (e) => {
@@ -185,7 +191,18 @@ submit.addEventListener("click", (e) => {
     });
   });
 });
-function isAvaileble(availble, room, indxRoom) {
+
+function filterArray(paravailableEmployees, role) {
+  let avEmployes = [];
+  paravailableEmployees.forEach((avEmp) => {
+    if (avEmp.Role === role) {
+      avEmployes.push(avEmp);
+    }
+  });
+  return avEmployes;
+}
+function isAvaileble(availble, room) {
+  staffContainer.innerHTML = ``;
   let filtredArray = [];
 
   if (room === "conf" || room === "per") {
@@ -209,34 +226,49 @@ function isAvaileble(availble, room, indxRoom) {
   if (room === "arch") {
     filtredArray = filterArray(availble, "Manager");
   }
-  const showUnassigned = document.createElement("div");
-  showUnassigned.className =
-    "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400";
-  filtredArray.forEach(fil =>{
+  filtredArray.forEach((fil) => {
+    const showUnassigned = document.createElement("div");
+    showUnassigned.className =
+      "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400";
     showUnassigned.innerHTML = `
         <img
-              src="${picture.value}"
+              src="${fil.PicURL}"
               alt="user_by_default"
               class=" rounded-full"
             />
           <div>
-          <h3 class="text-2xl">${fullName.value}</h3> 
-          <h4>${role.value}</h4>
+          <h3 class="text-2xl">${fil.FullName}</h3> 
+          <h4>${fil.Role}</h4>
           </div>  
-        
-    `
-  })  
+    `;
+
+    staffContainer.append(showUnassigned);
+
+    listAvelaible.classList.remove("hidden");
+    closeListAv.addEventListener("click", () => {
+      listAvelaible.classList.add("hidden");
+    });
+  });
 }
 addToChambre.forEach((add) => {
   add.addEventListener("click", () => {
     let availble = [];
     employees.forEach((emp) => {
-      if (emp.availble === "unasigned") {
+      if (emp.currRoom === "unasigned") {
         availble.push(emp);
+        console.log("clicked");
       }
     });
+    if (availble.length === 0) {
+      document.querySelector(".msg-no-worker").classList.remove("hidden");
+      setTimeout(() => {
+        document.querySelector(".msg-no-worker").classList.add("hidden");
+      }, 3000);
+      return; 
+    }
     if (add.classList.contains("conférence")) {
       isAvaileble(availble, "conf", 1);
+      
     }
     if (add.classList.contains("serveurs")) {
       isAvaileble(availble, "ser", 2);
