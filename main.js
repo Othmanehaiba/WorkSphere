@@ -21,10 +21,12 @@ const listAvelaible = document.querySelector(".list_availeble");
 const closeListAv = document.querySelector(".closePopup");
 const staffContainer = document.querySelector("#staffContainer");
 
-let room = null;
-let manyExp = 0;
+let finalURL = null;
 
-const addToChambre = document.querySelectorAll(".ajouter");
+// let room = null;
+// let manyExp = 0;
+
+const btnAddToChamber = document.querySelectorAll(".ajouter");
 
 const zoneAcces = {
   conference: [
@@ -52,14 +54,18 @@ let employees = [];
 
 picture.addEventListener("input", () => {
   const img = document.querySelector("#realPic");
-  if (!picture) {
+  if (!picture.value) {
     img.src = "image/d97bbb08017ac2309307f0822e63d082.jpg";
+    finalURL = "image/d97bbb08017ac2309307f0822e63d082.jpg";
   } else {
     img.src = picture.value;
+    finalURL = picture.value;
   }
 });
 
 btnAddWorker.addEventListener("click", () => {
+  console.log("clicked");
+
   pop_up.classList.remove("hidden");
 });
 
@@ -68,48 +74,74 @@ closePopUp.addEventListener("click", () => {
   document.querySelector(".form").reset();
 });
 
+// btnAddExperience.addEventListener("click", (e) => {
 btnAddExperience.addEventListener("click", (e) => {
   e.preventDefault();
   exps.innerHTML += `<div class="exp bg-gray-400 rounded mb-4">
+           <button
+            type="button"
+            class="deleteExp text-red-500 items-end ml-[90%] font-bold cursor-pointer"
+            id="deleteExp"
+          >
+            Delete
+          </button>
     <h2 class="text-white text-2xl font-bold mb-6 text-center pt-4">
     Add an Experience
     </h2>
+    <form class="formExp">
     <label class="block text-white mb-2 mx-[25%]" for="tele"
     >Previous Post</label
     >
     <input
-    class="w-full px-4 py-2 rounded bg-gray-600 text-white w-80 mx-[25%]"
+    class="px-4 py-2 rounded bg-gray-600 text-white w-auto mx-[25%]"
     type="text"
     id="post"
     placeholder="Ex: IT Tech "
     />
-            <label class="block text-white mb-2 mx-[25%]" for="tele"
+            <label class="block text-white mt-2 mx-[25%]" for="tele"
             >Previous Entreprise</label
             >
             <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white w-80 mx-[25%]"
+            class="px-4 py-2 rounded bg-zinc-600 text-white w-auto mx-[25%]"
             type="text"
             id="entreprise"
             value=" microsoft "
             placeholder="Ex: Microsoft "
             />
-            <label class="block text-white mb-2 mx-[25%]" for="tele"
+            <label class="block text-white mt-2 mx-[25%]" for="tele"
             >Start date</label
             >
             <input
-            class="w-full px-4 py-2 rounded bg-zinc-600 text-white w-80 mx-[25%]"
+            class="px-4 py-2 rounded bg-zinc-600 text-white w-auto mx-[25%]"
               type="date"
               id="start_date"
               />
-              <label class="block text-white mb-2 mx-[25%]" for="tele"
+              <label class="block text-white mt-2 mx-[25%]" for="tele"
               >End date</label
               >
               <input
-              class="w-full px-4 py-2 rounded bg-zinc-600 text-white mb-2 w-80 mx-[25%] pb-4"
+              class="px-4 py-2 rounded bg-zinc-600 text-white mb-2 w-auto mx-[25%] pb-4"
               type="date"
               id="end_date"
               />
+              </form>
               </div>`;
+              // document.getElementById('deleteExp').addEventListener('click' , ()=>{
+              //   document.querySelector('.exp').remove()
+              //     document.querySelector('.formExp').reset();
+              // })
+              document.getElementById('deleteExp').onclick = () =>{
+                // document.querySelector('.exp').remove()
+                // document.querySelector('.formExp').reset();
+                // console.log(document.querySelector('.exp'));
+                
+              }
+});
+// });
+exps.addEventListener("click", (event) => {  
+ const rmv = event.target.closest("#deleteExp");
+    rmv.parentElement.remove();
+  
 });
 
 submit.addEventListener("click", (e) => {
@@ -118,7 +150,7 @@ submit.addEventListener("click", (e) => {
   let employe = {
     FullName: fullName.value,
     Role: role.value,
-    PicURL: picture.value,
+    PicURL: finalURL,
     Email: email.value,
     Phone: phone.value,
     Experiences: [],
@@ -128,10 +160,10 @@ submit.addEventListener("click", (e) => {
 
   document.querySelectorAll(".exp").forEach((e) => {
     let exp = {};
-    const post = e.target.getElementById("post");
-    const entreprise = e.target.getElementById("entreprise");
-    const dateDebut = e.target.getElementById("start_date");
-    const dateFin = e.target.getElementById("end_date");
+    const post = document.getElementById("post");
+    const entreprise = document.getElementById("entreprise");
+    const dateDebut = document.getElementById("start_date");
+    const dateFin = document.getElementById("end_date");
 
     exp.PPost = post.value;
     exp.PEntreprise = entreprise.value;
@@ -183,7 +215,22 @@ submit.addEventListener("click", (e) => {
     <p><b>Role :</b> ${employees[id].Role}</p>
     <p><b>Email :</b> ${employees[id].Email}</p>
     <p><b>Phone :</b> ${employees[id].Phone}</p>
+    <h4 class="font-bold">Experiences Profesionnel:</h4>
   `;
+
+  //   Experiences.forEach((exp, indx) => {
+  //     experiencesHTML += `
+  //     <div class="mb-2">
+  //       <h4 class="font-bold">Experience ${indx + 1}:</h4>
+  //       <p><b>Previous Post :</b> ${exp.PPost}</p>
+  //       <p><b>Previous company :</b> ${exp.PEntreprise}</p>
+  //       <p><b>Start Date :</b> ${exp.SDate}</p>
+  //       <p><b>End Date :</b> ${exp.Edate}</p>
+  //     </div>
+  // `;
+  //     countain.append(experiencesHTML);
+  //     experiencesHTML = "";
+  //   });
 
     countain.appendChild(details);
     document.getElementById("closePopUp").addEventListener("click", () => {
@@ -201,7 +248,7 @@ function filterArray(paravailableEmployees, role) {
   });
   return avEmployes;
 }
-function isAvaileble(availble, room) {
+function isAvaileble(availble, room, roomName) {
   staffContainer.innerHTML = ``;
   let filtredArray = [];
 
@@ -244,19 +291,57 @@ function isAvaileble(availble, room) {
 
     staffContainer.append(showUnassigned);
 
+    showUnassigned.addEventListener("click", () => {
+      console.log("clicked");
+
+      const EmpToChamber = document.createElement("div");
+      EmpToChamber.className = "relative bg-white p-2 rounded shadow-md mb-2";
+      EmpToChamber.innerHTML = `
+    <button class="deleteBtn absolute top-1 right-1 text-red-500 font-bold text-xl hover:text-red-700">×</button>
+    <div class="flex items-center gap-2">
+      <img
+        src="${fil.PicURL}"
+        alt="user_by_default"
+        class="rounded-full w-10 h-10"
+      />
+      <div>
+        <h3 class="text-sm font-bold">${fil.FullName}</h3> 
+        <h4 class="text-xs text-gray-600">${fil.Role}</h4>
+      </div>
+    </div>
+  `;
+      document.querySelector(roomName).append(EmpToChamber);
+      fil.currRoom = roomName;
+      showUnassigned.remove();
+
+      if (staffContainer.children.length === 0) {
+        listAvelaible.classList.add("hidden");
+      }
+
+      // Delete button
+      confEmp.querySelector(".deleteBtn").addEventListener("click", () => {
+        console.log("clicked");
+
+        EmpToChamber.remove();
+        listAvelaible.classList.add("hidden");
+        // Set employee back to unassigned
+        fil.currRoom = "unasigned";
+      });
+    });
+
     listAvelaible.classList.remove("hidden");
     closeListAv.addEventListener("click", () => {
       listAvelaible.classList.add("hidden");
     });
   });
 }
-addToChambre.forEach((add) => {
+
+btnAddToChamber.forEach((add) => {
   add.addEventListener("click", () => {
     let availble = [];
     employees.forEach((emp) => {
       if (emp.currRoom === "unasigned") {
         availble.push(emp);
-        console.log("clicked");
       }
     });
     if (availble.length === 0) {
@@ -264,26 +349,25 @@ addToChambre.forEach((add) => {
       setTimeout(() => {
         document.querySelector(".msg-no-worker").classList.add("hidden");
       }, 3000);
-      return; 
+      return;
     }
     if (add.classList.contains("conférence")) {
-      isAvaileble(availble, "conf", 1);
-      
+      isAvaileble(availble, "conf", ".conference");
     }
     if (add.classList.contains("serveurs")) {
-      isAvaileble(availble, "ser", 2);
+      isAvaileble(availble, "ser", ".serveurs");
     }
     if (add.classList.contains("security")) {
-      isAvaileble(availble, "sec", 3);
+      isAvaileble(availble, "sec", ".security");
     }
     if (add.classList.contains("reception")) {
-      isAvaileble(availble, "res", 4);
+      isAvaileble(availble, "res", ".reception");
     }
     if (add.classList.contains("personel")) {
-      isAvaileble(availble, "pers", 5);
+      isAvaileble(availble, "pers", ".personel");
     }
     if (add.classList.contains("archive")) {
-      isAvaileble(availble, "arch", 6);
+      isAvaileble(availble, "arch", ".archive");
     }
   });
 });
