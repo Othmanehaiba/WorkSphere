@@ -20,52 +20,22 @@ const addServeurs = document.getElementById("serveursBtn");
 const listAvelaible = document.querySelector(".list_availeble");
 const closeListAv = document.querySelector(".closePopup");
 const staffContainer = document.querySelector("#staffContainer");
+const btnAddToChamber = document.querySelectorAll(".ajouter");
 
 let finalURL = null;
 
-// let room = null;
-// let manyExp = 0;
-
-const btnAddToChamber = document.querySelectorAll(".ajouter");
-
-const zoneAcces = {
-  conference: [
-    "Manager",
-    "Réceptionnistes",
-    "Techniciens IT",
-    "Agents de sécurité",
-    "Nettoyage",
-    "Autres rôles",
-  ],
-  personnel: [
-    "Manager",
-    "Réceptionnistes",
-    "Techniciens IT",
-    "Agents de sécurité",
-    "Nettoyage",
-    "Autres rôles",
-  ],
-  servers: ["Techniciens IT", "Manager", "Nettoyage"],
-  security: ["Agents de sécurité", "Manager", "Nettoyage"],
-  Réception: ["Réceptionnistes", "Manager", "Nettoyage"],
-  archive: ["Manager"],
-};
 let employees = [];
 
 picture.addEventListener("input", () => {
   const img = document.querySelector("#realPic");
   if (!picture.value) {
     img.src = "image/d97bbb08017ac2309307f0822e63d082.jpg";
-    finalURL = "image/d97bbb08017ac2309307f0822e63d082.jpg";
   } else {
     img.src = picture.value;
-    finalURL = picture.value;
   }
 });
 
 btnAddWorker.addEventListener("click", () => {
-  console.log("clicked");
-
   pop_up.classList.remove("hidden");
 });
 
@@ -74,7 +44,6 @@ closePopUp.addEventListener("click", () => {
   document.querySelector(".form").reset();
 });
 
-// btnAddExperience.addEventListener("click", (e) => {
 btnAddExperience.addEventListener("click", (e) => {
   e.preventDefault();
   exps.innerHTML += `<div class="exp bg-gray-400 rounded mb-4">
@@ -125,92 +94,56 @@ btnAddExperience.addEventListener("click", (e) => {
               id="end_date"
               />
               </form>
-              </div>`;
-              // document.getElementById('deleteExp').addEventListener('click' , ()=>{
-              //   document.querySelector('.exp').remove()
-              //     document.querySelector('.formExp').reset();
-              // })
-              document.getElementById('deleteExp').onclick = () =>{
-                // document.querySelector('.exp').remove()
-                // document.querySelector('.formExp').reset();
-                // console.log(document.querySelector('.exp'));
-                
-              }
+                      </div>`;
 });
-// });
-exps.addEventListener("click", (event) => {  
- const rmv = event.target.closest("#deleteExp");
+
+exps.addEventListener("click", (event) => {
+  const rmv = event.target.closest("#deleteExp");
+  if (rmv) {
     rmv.parentElement.remove();
-  
+  }
 });
 
-submit.addEventListener("click", (e) => {
-  e.preventDefault();
-
-  let employe = {
-    FullName: fullName.value,
-    Role: role.value,
-    PicURL: finalURL,
-    Email: email.value,
-    Phone: phone.value,
-    Experiences: [],
-    currRoom: "unasigned",
-  };
-  console.log(employe.Role);
-
-  document.querySelectorAll(".exp").forEach((e) => {
-    let exp = {};
-    const post = document.getElementById("post");
-    const entreprise = document.getElementById("entreprise");
-    const dateDebut = document.getElementById("start_date");
-    const dateFin = document.getElementById("end_date");
-
-    exp.PPost = post.value;
-    exp.PEntreprise = entreprise.value;
-    exp.SDate = dateDebut.value;
-    exp.Edate = dateFin.value;
-
-    employe.Experiences.push(exp);
-    // document.querySelector("form").reset();
-  });
-
-  employees.push(employe);
+function createSidebarCard(employee, index) {
   const container_cards = document.querySelector(".container_cards");
   const card = document.createElement("div");
   card.classList.add("card");
-  card.dataset.id = employees.length - 1;
+  card.dataset.id = index;
   card.innerHTML = `
         <div class="card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400">
         <img
-              src="${picture.value}"
+              src="${employee.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
               alt="user_by_default"
-              class=" rounded-full"
+              class="rounded-full w-20 h-20"
             />
           <div>
-          <h3 class="text-2xl">${fullName.value}</h3> 
-          <h4>${role.value}</h4>
+          <h3 class="text-2xl">${employee.FullName}</h3> 
+          <h4>${employee.Role}</h4>
           </div>  
         </div>`;
-  container_cards.append(card);
-  pop_up.classList.add("hidden");
-  form.reset();
 
-  //   const cards = document.querySelectorAll('.card');
   card.addEventListener("click", (e) => {
     const id = e.target.closest(".card").dataset.id;
+    showEmployeeDetails(id);
+  });
 
-    const countain = document.querySelector(".details");
-    countain.classList.remove("hidden");
-    countain.innerHTML = "";
+  container_cards.append(card);
+  return card;
+}
 
-    const details = document.createElement("div");
-    details.innerHTML = `
+
+function showEmployeeDetails(id) {
+  const countain = document.querySelector(".details");
+  countain.classList.remove("hidden");
+  countain.innerHTML = "";
+
+  const details = document.createElement("div");
+  details.innerHTML = `
     <button
             type="button"
-            class="text-red-500 items-end ml-[100%] font-bold"
+            class="text-red-500 items-end ml-[95%] font-bold"
             id="closePopUp">X</button>
-    <img src="${employees[id].PicURL}" class="w-auto h-auto rounded-full"> 
-
+    <img src="${employees[id].PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}" class="w-[50%] h-[50%] rounded-full mx-auto"> 
     <h3><b>FullName :</b> ${employees[id].FullName}</h3>
     <p><b>Role :</b> ${employees[id].Role}</p>
     <p><b>Email :</b> ${employees[id].Email}</p>
@@ -218,25 +151,58 @@ submit.addEventListener("click", (e) => {
     <h4 class="font-bold">Experiences Profesionnel:</h4>
   `;
 
-  //   Experiences.forEach((exp, indx) => {
-  //     experiencesHTML += `
-  //     <div class="mb-2">
-  //       <h4 class="font-bold">Experience ${indx + 1}:</h4>
-  //       <p><b>Previous Post :</b> ${exp.PPost}</p>
-  //       <p><b>Previous company :</b> ${exp.PEntreprise}</p>
-  //       <p><b>Start Date :</b> ${exp.SDate}</p>
-  //       <p><b>End Date :</b> ${exp.Edate}</p>
-  //     </div>
-  // `;
-  //     countain.append(experiencesHTML);
-  //     experiencesHTML = "";
-  //   });
-
-    countain.appendChild(details);
-    document.getElementById("closePopUp").addEventListener("click", () => {
-      document.querySelector(".details").classList.add("hidden");
-    });
+  // Add experiences if any
+  employees[id].Experiences.forEach((exp, indx) => {
+    const expDiv = document.createElement("div");
+    expDiv.className = "mb-2";
+    expDiv.innerHTML = `
+      <h4 class="font-bold">Experience ${indx + 1}:</h4>
+      <p><b>Previous Post :</b> ${exp.PPost}</p>
+      <p><b>Previous company :</b> ${exp.PEntreprise}</p>
+      <p><b>Start Date :</b> ${exp.SDate}</p>
+      <p><b>End Date :</b> ${exp.Edate}</p>
+    `;
+    details.appendChild(expDiv);
   });
+
+  countain.appendChild(details);
+  document.getElementById("closePopUp").addEventListener("click", () => {
+    document.querySelector(".details").classList.add("hidden");
+  });
+}
+
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let employe = {
+    FullName: fullName.value,
+    Role: role.value,
+    PicURL: picture.value || 'image/d97bbb08017ac2309307f0822e63d082.jpg',
+    Email: email.value,
+    Phone: phone.value,
+    Experiences: [],
+    currRoom: "unasigned",
+  };
+
+  document.querySelectorAll(".exp").forEach((e) => {
+    let exp = {};
+    const post = e.querySelector("#post");
+    const entreprise = e.querySelector("#entreprise");
+    const dateDebut = e.querySelector("#start_date");
+    const dateFin = e.querySelector("#end_date");
+
+    exp.PPost = post.value;
+    exp.PEntreprise = entreprise.value;
+    exp.SDate = dateDebut.value;
+    exp.Edate = dateFin.value;
+
+    employe.Experiences.push(exp);
+  });
+
+  employees.push(employe);
+  createSidebarCard(employe, employees.length - 1);
+  pop_up.classList.add("hidden");
+  form.reset();
 });
 
 function filterArray(paravailableEmployees, role) {
@@ -248,11 +214,12 @@ function filterArray(paravailableEmployees, role) {
   });
   return avEmployes;
 }
+
 function isAvaileble(availble, room, roomName) {
   staffContainer.innerHTML = ``;
   let filtredArray = [];
 
-  if (room === "conf" || room === "per") {
+  if (room === "conf" || room === "pers") {
     filtredArray.push(...availble);
   }
   if (room === "ser") {
@@ -273,15 +240,16 @@ function isAvaileble(availble, room, roomName) {
   if (room === "arch") {
     filtredArray = filterArray(availble, "Manager");
   }
+
   filtredArray.forEach((fil) => {
     const showUnassigned = document.createElement("div");
     showUnassigned.className =
       "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400";
     showUnassigned.innerHTML = `
         <img
-              src="${fil.PicURL}"
+              src="${fil.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
               alt="user_by_default"
-              class=" rounded-full"
+              class="rounded-full"
             />
           <div>
           <h3 class="text-2xl">${fil.FullName}</h3> 
@@ -290,17 +258,16 @@ function isAvaileble(availble, room, roomName) {
     `;
 
     staffContainer.append(showUnassigned);
-
     showUnassigned.addEventListener("click", () => {
-      console.log("clicked");
-
       const EmpToChamber = document.createElement("div");
       EmpToChamber.className = "relative bg-white p-2 rounded shadow-md mb-2";
+      const empIndex = employees.indexOf(fil);
+      EmpToChamber.dataset.id = empIndex;
       EmpToChamber.innerHTML = `
     <button class="deleteBtn absolute top-1 right-1 text-red-500 font-bold text-xl hover:text-red-700">×</button>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 employee-card-chamber cursor-pointer">
       <img
-        src="${fil.PicURL}"
+        src="${fil.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
         alt="user_by_default"
         class="rounded-full w-10 h-10"
       />
@@ -309,23 +276,36 @@ function isAvaileble(availble, room, roomName) {
         <h4 class="text-xs text-gray-600">${fil.Role}</h4>
       </div>
     </div>
-  `;
+      `;
       document.querySelector(roomName).append(EmpToChamber);
+
+      // Add click event to show details for chamber employee
+      EmpToChamber.querySelector(".employee-card-chamber").addEventListener("click", () => {
+        showEmployeeDetails(empIndex);
+      });
+
+      // Update employee room status
       fil.currRoom = roomName;
+      
+      // Remove from sidebar
+      const sidebarCard = document.querySelector(`.card[data-id="${empIndex}"]`);
+      if (sidebarCard) {
+        sidebarCard.remove();
+      }
+      
       showUnassigned.remove();
 
       if (staffContainer.children.length === 0) {
         listAvelaible.classList.add("hidden");
       }
 
-      // Delete button
-      confEmp.querySelector(".deleteBtn").addEventListener("click", () => {
-        console.log("clicked");
-
+      // Delete button - return employee to sidebar
+      EmpToChamber.querySelector(".deleteBtn").addEventListener("click", () => {
         EmpToChamber.remove();
-        listAvelaible.classList.add("hidden");
-        // Set employee back to unassigned
         fil.currRoom = "unasigned";
+        
+        // Re-add to sidebar
+        createSidebarCard(fil, empIndex);
       });
     });
 
