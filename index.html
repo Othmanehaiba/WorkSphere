@@ -11,7 +11,7 @@
   <body class="flex min-h-screen relative">
     <aside class="side bg-zinc-800 w-[50vh] max-h-screen overflow-y-auto">
       <button
-        class="text-white mx-32 bg-blue-600 w-32 p-2 rounded hover:bg-blue-800 mt-6"
+        class="text-white mx-32 bg-blue-600 w-32 p-2 rounded hover:bg-blue-800 mt-6 cursor-pointer"
         id="addWorker"
       >
         Add a Worker
@@ -28,11 +28,11 @@
       />
       <div class="chambers absolute top-0 left-0 w-full h-full">
         <div
-          class="conférence bg-green-600/50 flex flex-col gap-4 justify-center items-center"
+          class="conference bg-green-600/50 flex flex-col gap-4 justify-center items-center overflow-y-auto"
         >
           <h3 class="text-lg">Conférence Room</h3>
           <button
-            class="ajouter conférence bg-blue-600 h-auto w-4 text-white"
+            class="ajouter conférence bg-blue-600 h-auto w-4 text-white cursor-pointer"
             id="conférenceBtn"
           >
             +
@@ -43,7 +43,7 @@
         >
           <h3 class="text-lg">Serveurs Room</h3>
           <button
-            class="ajouter serveurs bg-blue-600 h-auto w-4 text-white"
+            class="ajouter serveurs bg-blue-600 h-auto w-4 text-white cursor-pointer"
             id="serveursBtn"
           >
             +
@@ -54,7 +54,7 @@
         >
           <h3 class="text-lg">Security Room</h3>
           <button
-            class="ajouter security bg-blue-600 h-auto w-4 text-white"
+            class="ajouter security bg-blue-600 h-auto w-4 text-white cursor-pointer"
             id="securityBtn"
           >
             +
@@ -65,7 +65,7 @@
         >
           <h3 class="text-lg">Reciption Room</h3>
           <button
-            class="ajouter reception bg-blue-600 h-auto w-4 text-white"
+            class="ajouter reception bg-blue-600 h-auto w-4 text-white cursor-pointer"
             id="receptionBtn"
           >
             +
@@ -75,7 +75,7 @@
           class="personel bg-green-600/50 flex flex-col justify-center items-center"
         >
           <h3 class="text-lg">Staff Room</h3>
-          <button class="ajouter personel bg-blue-600 h-auto w-4 text-white" id="personelBtn">
+          <button class="ajouter personel bg-blue-600 h-auto w-4 text-white cursor-pointer" id="personelBtn">
             +
           </button>
         </div>
@@ -83,7 +83,7 @@
           class="archive bg-gray-600/50 flex flex-col justify-center items-center"
         >
           <h3 class="text-lg">Archive Room</h3>
-          <button class="ajouter archive bg-blue-600 h-auto w-4 text-white" id="archiveBtn">
+          <button class="ajouter archive bg-blue-600 h-auto w-4 text-white cursor-pointer" id="archiveBtn">
             +
           </button>
         </div>
@@ -109,12 +109,12 @@
         >
           <button
             type="button"
-            class="text-red-500 items-end ml-[100%] font-bold"
+            class="text-red-500 items-end ml-[100%] font-bold cursor-pointer"
             id="X"
           >
             X
           </button>
-          <h2 class="text-white text-2xl font-bold mb-6 text-center">
+          <h2 class="text-white text-2xl font-bold mb-6 text-center ">
             Add a Worker
           </h2>
 
@@ -189,7 +189,7 @@
             />
           </div>
           <button
-            class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 mb-4 rounded"
+            class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 mb-4 rounded cursor-pointer"
             id="experience"
           >
             Add Experience
@@ -198,7 +198,7 @@
           <!-- <div class="Exp bg-gray-400 rounded mb-4"></div> -->
           <button
             type="submit"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded cursor-pointer"
             id="submit"
           >
             Submit
@@ -207,7 +207,7 @@
       </div>
       <div class="msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md  shadow-red-600 shadow-lg text-center font-semibold animate-bounce hidden">
                 No employee is allowed to enter this room!
-            </div>
+      </div>  
     </main>
     <script src="main.js"></script>
   </body>
