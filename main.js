@@ -107,10 +107,10 @@ exps.addEventListener("click", (event) => {
 function createSidebarCard(employee, index) {
   const container_cards = document.querySelector(".container_cards");
   const card = document.createElement("div");
-  card.classList.add("card");
+  card.className = "card flex mx-4 rounded mb-4 mt-2 bg-gray-400"
   card.dataset.id = index;
   card.innerHTML = `
-        <div class="card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400">
+        
         <img
               src="${
                 employee.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
@@ -122,7 +122,7 @@ function createSidebarCard(employee, index) {
           <h3 class="text-2xl">${employee.FullName}</h3> 
           <h4>${employee.Role}</h4>
           </div>  
-        </div>`;
+        `;
 
   card.addEventListener("click", (e) => {
     const id = e.target.closest(".card").dataset.id;
@@ -335,7 +335,7 @@ function isAvaileble(availble, room, roomName) {
     staffContainer.append(showUnassigned);
     showUnassigned.addEventListener("click", () => {
       const EmpToChamber = document.createElement("div");
-      EmpToChamber.className = "relative bg-white p-2 rounded shadow-md mb-2";
+      EmpToChamber.className = "employe relative bg-white p-2 rounded shadow-md mb-2";
       const empIndex = employees.indexOf(fil);
       EmpToChamber.dataset.id = empIndex;
       EmpToChamber.innerHTML = `
@@ -352,7 +352,7 @@ function isAvaileble(availble, room, roomName) {
       </div>
     </div>
       `;
-      document.querySelector(roomName).append(EmpToChamber);
+      document.querySelector('.'+roomName).append(EmpToChamber);
       // staffContainer.classList.add("hidden")
 
       // Add click event to show details for chamber employee
@@ -412,7 +412,7 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("conférence")) {
       if (document.querySelector(".conference").children.length - 1 < 4) {
-        isAvaileble(availble, "conf", ".conference");
+        isAvaileble(availble, "conf", "conference");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
@@ -440,7 +440,7 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("security")) {
       if (document.querySelector(".security").children.length - 1 < 4) {
-        isAvaileble(availble, "sec", ".security");
+        isAvaileble(availble, "sec", "security");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
@@ -454,7 +454,7 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("reception")) {
       if (document.querySelector(".reception").children.length - 1 < 8) {
-        isAvaileble(availble, "res", ".reception");
+        isAvaileble(availble, "res", "reception");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
@@ -468,7 +468,7 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("personel")) {
       if (document.querySelector(".personel").children.length - 1 < 4) {
-        isAvaileble(availble, "pers", ".personel");
+        isAvaileble(availble, "pers", "personel");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
@@ -482,7 +482,7 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("archive")) {
       if (document.querySelector(".archive").children.length - 1 < 4) {
-        isAvaileble(availble, "arch", ".archive");
+        isAvaileble(availble, "arch", "archive");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
