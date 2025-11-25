@@ -112,7 +112,9 @@ function createSidebarCard(employee, index) {
   card.innerHTML = `
         <div class="card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400">
         <img
-              src="${employee.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
+              src="${
+                employee.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
+              }"
               alt="user_by_default"
               class="rounded-full w-20 h-20"
             />
@@ -131,7 +133,6 @@ function createSidebarCard(employee, index) {
   return card;
 }
 
-
 function showEmployeeDetails(id) {
   const countain = document.querySelector(".details");
   countain.classList.remove("hidden");
@@ -143,7 +144,9 @@ function showEmployeeDetails(id) {
             type="button"
             class="text-red-500 items-end ml-[95%] font-bold"
             id="closePopUp">X</button>
-    <img src="${employees[id].PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}" class="w-[50%] h-[50%] rounded-full mx-auto"> 
+    <img src="${
+      employees[id].PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
+    }" class="w-[50%] h-[50%] rounded-full mx-auto"> 
     <h3><b>FullName :</b> ${employees[id].FullName}</h3>
     <p><b>Role :</b> ${employees[id].Role}</p>
     <p><b>Email :</b> ${employees[id].Email}</p>
@@ -173,86 +176,106 @@ function showEmployeeDetails(id) {
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  
-  if (!fullName.value.trim()) {
-    alert("Please enter a full name");
-    return;
-  }
 
-  const nameRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
-  if (!nameRegex.test(fullName.value)) {
-    alert("Full name can only contain letters, spaces, and hyphens");
-    return;
-  }
+  // if (!fullName.value.trim()) {
+  //   alert("Please enter a full name");
+  //   fullName.focus();
+  //   return;
+  // }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email.value.trim() || !emailRegex.test(email.value)) {
-    alert("Please enter a valid email address");
-    return;
-  }
+  // const nameRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
+  // if (!nameRegex.test(fullName.value)) {
+  //   alert("Full name can only contain letters, spaces, and hyphens");
+  //   fullName.focus();
+  //   return;
+  // }
 
-  const phoneRegex = /^0[5-7]\d{8}$/;
-  if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
-    alert("Please enter a valid Moroccan phone number (10 digits starting with 05, 06, or 07)");
-    return;
-  }
+  // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // if (!email.value.trim() || !emailRegex.test(email.value)) {
+  //   alert("Please enter a valid email address");
+  //   email.focus();
+  //   return;
+  // }
+
+  // const phoneRegex = /^0[5-7]\d{8}$/;
+  // if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
+  //   alert("Please enter a valid Moroccan phone number (10 digits starting with 05, 06, or 07)");
+  //   phone.focus();
+  //   return;
+  // }
 
   let employe = {
     FullName: fullName.value,
     Role: role.value,
-    PicURL: picture.value || 'image/d97bbb08017ac2309307f0822e63d082.jpg',
+    PicURL: picture.value || "image/d97bbb08017ac2309307f0822e63d082.jpg",
     Email: email.value,
     Phone: phone.value,
     Experiences: [],
     currRoom: "unasigned",
   };
 
+  // Flag to track if ALL experiences are valid
+  let allExpValid = true;
+
   document.querySelectorAll(".exp").forEach((e) => {
-    let exp = {};
+    if (!allExpValid) return; // Skip if already failed
+
     const post = e.querySelector("#post");
     const entreprise = e.querySelector("#entreprise");
     const dateDebut = e.querySelector("#start_date");
     const dateFin = e.querySelector("#end_date");
 
-    if (!post.value.trim()) {
-      alert("Please fill in the previous post for all experiences");
-      experienceValid = false;
-      return;
-    }
+    // if (!post.value.trim()) {
+    //   alert("Please fill in the previous post for all experiences");
+    //   post.focus();
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    if (!entreprise.value.trim()) {
-      alert("Please fill in the previous company for all experiences");
-      experienceValid = false;
-      return;
-    }
+    // if (!entreprise.value.trim()) {
+    //   alert("Please fill in the previous company for all experiences");
+    //   entreprise.focus();
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    if (!dateDebut.value || !dateFin.value) {
-      alert("Please fill in both start and end dates for all experiences");
-      experienceValid = false;
-      return;
-    }
+    // if (!dateDebut.value || !dateFin.value) {
+    //   alert("Please fill in both start and end dates for all experiences");
+    //   dateDebut.focus();
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    const startDate = new Date(dateDebut.value);
-    const endDate = new Date(dateFin.value);
+    // const startDate = new Date(dateDebut.value);
+    // const endDate = new Date(dateFin.value);
 
-    if (startDate >= endDate) {
-      alert("Start date must be before end date in all experiences");
-      experienceValid = false;
-      return;
-    }
+    // if (startDate >= endDate) {
+    //   alert("Start date must be before end date in all experiences");
+    //   dateDebut.focus();
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    exp.PPost = post.value;
-    exp.PEntreprise = entreprise.value;
-    exp.SDate = dateDebut.value;
-    exp.Edate = dateFin.value;
-
+    // Only add experience if valid
+    let exp = {
+      PPost: post.value,
+      PEntreprise: entreprise.value,
+      SDate: dateDebut.value,
+      Edate: dateFin.value,
+    };
     employe.Experiences.push(exp);
   });
+
+  // Stop if any experience was invalid
+  // if (!allExpValid) {
+  //   return;
+  // }
 
   employees.push(employe);
   createSidebarCard(employe, employees.length - 1);
   pop_up.classList.add("hidden");
   form.reset();
+  exps.innerHTML = ""; // Clear experiences
 });
 
 function filterArray(paravailableEmployees, role) {
@@ -297,7 +320,9 @@ function isAvaileble(availble, room, roomName) {
       "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400";
     showUnassigned.innerHTML = `
         <img
-              src="${fil.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
+              src="${
+                fil.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
+              }"
               alt="user_by_default"
               class="rounded-full w-[20%] h-[20%]"
             />
@@ -314,10 +339,10 @@ function isAvaileble(availble, room, roomName) {
       const empIndex = employees.indexOf(fil);
       EmpToChamber.dataset.id = empIndex;
       EmpToChamber.innerHTML = `
-    <button class="deleteBtn absolute top-1 right-1 text-red-500 font-bold text-xl hover:text-red-700">×</button>
+    <button class="deleteBtn absolute top-1 right-1 text-red-500 font-bold text-xl hover:text-red-700">X</button>
     <div class="flex items-center gap-2 employee-card-chamber cursor-pointer">
       <img
-        src="${fil.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
+        src="${fil.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"}"
         alt="user_by_default"
         class="rounded-full w-10 h-10"
       />
@@ -328,32 +353,36 @@ function isAvaileble(availble, room, roomName) {
     </div>
       `;
       document.querySelector(roomName).append(EmpToChamber);
+      // staffContainer.classList.add("hidden")
 
       // Add click event to show details for chamber employee
-      EmpToChamber.querySelector(".employee-card-chamber").addEventListener("click", () => {
-        showEmployeeDetails(empIndex);
-      });
+      EmpToChamber.querySelector(".employee-card-chamber").addEventListener(
+        "click",
+        () => {
+          showEmployeeDetails(empIndex);
+        }
+      );
 
       // Update employee room status
       fil.currRoom = roomName;
-      
+
       // Remove from sidebar
-      const sidebarCard = document.querySelector(`.card[data-id="${empIndex}"]`);
+      const sidebarCard = document.querySelector(
+        `.card[data-id="${empIndex}"]`
+      );
       if (sidebarCard) {
         sidebarCard.remove();
       }
-      
+
       showUnassigned.remove();
 
-      if (staffContainer.children.length === 0) {
-        listAvelaible.classList.add("hidden");
-      }
+      listAvelaible.classList.add("hidden");
 
       // Delete button - return employee to sidebar
       EmpToChamber.querySelector(".deleteBtn").addEventListener("click", () => {
         EmpToChamber.remove();
         fil.currRoom = "unasigned";
-        
+
         // Re-add to sidebar
         createSidebarCard(fil, empIndex);
       });
@@ -382,22 +411,88 @@ btnAddToChamber.forEach((add) => {
       return;
     }
     if (add.classList.contains("conférence")) {
-      isAvaileble(availble, "conf", ".conference");
+      if (document.querySelector(".conference").children.length - 1 < 4) {
+        isAvaileble(availble, "conf", ".conference");
+      } else {
+        const fullRoom = document.createElement("div");
+        fullRoom.className =
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+        fullRoom.textContent = "This room is full (max 4 employees)";
+        document.body.append(fullRoom);
+        setTimeout(() => {
+          fullRoom.remove();
+        }, 3000);
+      }
     }
     if (add.classList.contains("serveurs")) {
-      isAvaileble(availble, "ser", ".serveurs");
+      if (document.querySelector(".serveurs").children.length - 1 < 4) {
+        isAvaileble(availble, "ser", ".serveurs");
+      } else {
+        const fullRoom = document.createElement("div");
+        fullRoom.className =
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+        fullRoom.textContent = "This room is full (max 4 employees)";
+        document.body.append(fullRoom);
+        setTimeout(() => {
+          fullRoom.remove();
+        }, 3000);
+      }
     }
     if (add.classList.contains("security")) {
-      isAvaileble(availble, "sec", ".security");
+      if (document.querySelector(".security").children.length - 1 < 4) {
+        isAvaileble(availble, "sec", ".security");
+      } else {
+        const fullRoom = document.createElement("div");
+        fullRoom.className =
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+        fullRoom.textContent = "This room is full (max 4 employees)";
+        document.body.append(fullRoom);
+        setTimeout(() => {
+          fullRoom.remove();
+        }, 3000);
+      }
     }
     if (add.classList.contains("reception")) {
-      isAvaileble(availble, "res", ".reception");
+      if (document.querySelector(".reception").children.length - 1 < 8) {
+        isAvaileble(availble, "res", ".reception");
+      } else {
+        const fullRoom = document.createElement("div");
+        fullRoom.className =
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+        fullRoom.textContent = "This room is full (max 10 employees)";
+        document.body.append(fullRoom);
+        setTimeout(() => {
+          fullRoom.remove();
+        }, 3000);
+      }
     }
     if (add.classList.contains("personel")) {
-      isAvaileble(availble, "pers", ".personel");
+      if (document.querySelector(".personel").children.length - 1 < 4) {
+        isAvaileble(availble, "pers", ".personel");
+      } else {
+        const fullRoom = document.createElement("div");
+        fullRoom.className =
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+        fullRoom.textContent = "This room is full (max 4 employees)";
+        document.body.append(fullRoom);
+        setTimeout(() => {
+          fullRoom.remove();
+        }, 3000);
+      }
     }
     if (add.classList.contains("archive")) {
-      isAvaileble(availble, "arch", ".archive");
+      if (document.querySelector(".archive").children.length - 1 < 4) {
+        isAvaileble(availble, "arch", ".archive");
+      } else {
+        const fullRoom = document.createElement("div");
+        fullRoom.className =
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+        fullRoom.textContent = "This room is full (max 2 employees)";
+        document.body.append(fullRoom);
+        setTimeout(() => {
+          fullRoom.remove();
+        }, 3000);
+      }
     }
   });
 });

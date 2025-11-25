@@ -28,64 +28,76 @@
       />
       <div class="chambers absolute top-0 left-0 w-full h-full">
         <div
-          class="conference bg-green-600/50 flex flex-col gap-4 justify-center items-center overflow-y-auto"
+          class="conference bg-[#F5C857] grid grid-cols-2 grid-rows-3"
         >
-          <h3 class="text-lg">Conférence Room</h3>
+        <div class="headerChamber flex flex-col row-start-1 row-end-2 col-start-1 col-end-3">
+          <h3 class="text-lg flex justify-center bg-green-600">Conférence Room</h3>
           <button
-            class="ajouter conférence bg-blue-600 h-auto w-4 text-white cursor-pointer"
+            class="ajouter conférence bg-blue-600 h-auto w-4 mx-auto text-white cursor-pointer"
             id="conférenceBtn"
           >
             +
           </button>
+          </div>
         </div>
         <div
-          class="serveurs bg-yellow-600/50 flex flex-col justify-center items-center"
+          class="serveurs bg-[#F5C857] grid grid-cols-2 grid-rows-3"
         >
-          <h3 class="text-lg">Serveurs Room</h3>
+        <div class="headerChamber flex flex-col row-start-1 row-end-2 col-start-1 col-end-3">
+          <h3 class="text-lg flex justify-center bg-yellow-600  ">Serveurs Room</h3>
           <button
-            class="ajouter serveurs bg-blue-600 h-auto w-4 text-white cursor-pointer"
+            class="ajouter serveurs bg-blue-600 h-auto w-4 mx-auto text-white cursor-pointer"
             id="serveursBtn"
           >
             +
           </button>
+          </div>
         </div>
         <div
-          class="security bg-red-600/50 flex flex-col justify-center items-center"
+          class="security  grid grid-cols-2 grid-rows-3"
         >
-          <h3 class="text-lg">Security Room</h3>
+        <div class="headerChamber flex flex-col row-start-1 row-end-2 col-start-1 col-end-3">
+          <h3 class="text-lg flex justify-center bg-red-600">Security Room</h3>
           <button
-            class="ajouter security bg-blue-600 h-auto w-4 text-white cursor-pointer"
+            class="ajouter security bg-blue-600 h-auto w-4 mx-auto text-white cursor-pointer"
             id="securityBtn"
           >
             +
           </button>
+          </div>
         </div>
         <div
-          class="reception bg-blue-600/50 flex flex-col justify-center items-center"
+          class="reception  grid grid-cols-2 grid-rows-6"
         >
-          <h3 class="text-lg">Reciption Room</h3>
+          <div class="headerChamber flex flex-col row-start-1 row-end-2 col-start-1 col-end-3">
+            <h3 class="text-lg flex justify-center bg-blue-600/50">Reciption Room</h3>
           <button
-            class="ajouter reception bg-blue-600 h-auto w-4 text-white cursor-pointer"
+            class="ajouter flex justify-center reception mx-auto bg-blue-600 h-auto w-4 text-white cursor-pointer"
             id="receptionBtn"
           >
             +
           </button>
+          </div>
         </div>
         <div
-          class="personel bg-green-600/50 flex flex-col justify-center items-center"
+          class="personel grid grid-cols-2 grid-rows-3"
         >
-          <h3 class="text-lg">Staff Room</h3>
-          <button class="ajouter personel bg-blue-600 h-auto w-4 text-white cursor-pointer" id="personelBtn">
+        <div class="headerChamber flex flex-col row-start-1 row-end-2 col-start-1 col-end-3">
+          <h3 class="text-lg flex justify-center bg-green-600">Staff Room</h3>
+          <button class="ajouter personel bg-blue-600 h-auto w-4 mx-auto text-white cursor-pointer" id="personelBtn">
             +
           </button>
+          </div>
         </div>
         <div
-          class="archive bg-gray-600/50 flex flex-col justify-center items-center"
+          class="archive  grid grid-cols-2 grid-rows-3"
         >
-          <h3 class="text-lg">Archive Room</h3>
-          <button class="ajouter archive bg-blue-600 h-auto w-4 text-white cursor-pointer" id="archiveBtn">
+        <div class="headerChamber flex flex-col row-start-1 row-end-2 col-start-1 col-end-3">
+          <h3 class="text-lg flex justify-center bg-gray-600">Archive Room</h3>
+          <button class="ajouter archive flex bg-blue-600 mx-auto h-auto w-4 justify-center text-white cursor-pointer" id="archiveBtn">
             +
           </button>
+          </div>
         </div>
       </div>
        <div class="list_availeble absolute inset-0 bg-white w-[40%] rounded-lg max-h-[60vh] overflow-y-auto hidden">
@@ -188,13 +200,13 @@
               placeholder="Ex: 0612345678"
             />
           </div>
+          <div class="experiences"></div>
           <button
             class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 mb-4 rounded cursor-pointer"
             id="experience"
           >
             Add Experience
           </button>
-          <div class="experiences"></div>
           <!-- <div class="Exp bg-gray-400 rounded mb-4"></div> -->
           <button
             type="submit"
@@ -205,7 +217,7 @@
           </button>
         </form>
       </div>
-      <div class="msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md  shadow-red-600 shadow-lg text-center font-semibold animate-bounce hidden">
+      <div class="msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md  shadow-red-600 shadow-lg text-center font-semibold hidden">
                 No employee is allowed to enter this room!
       </div>  
     </main>
