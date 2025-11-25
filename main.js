@@ -177,32 +177,32 @@ function showEmployeeDetails(id) {
 submit.addEventListener("click", (e) => {
   e.preventDefault();
 
-  // if (!fullName.value.trim()) {
-  //   alert("Please enter a full name");
-  //   fullName.focus();
-  //   return;
-  // }
+  if (!fullName.value.trim()) {
+    alert("Please enter a full name");
+    fullName.focus();
+    return;
+  }
 
-  // const nameRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
-  // if (!nameRegex.test(fullName.value)) {
-  //   alert("Full name can only contain letters, spaces, and hyphens");
-  //   fullName.focus();
-  //   return;
-  // }
+  const nameRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
+  if (!nameRegex.test(fullName.value)) {
+    alert("Full name can only contain letters, spaces, and hyphens");
+    fullName.focus();
+    return;
+  }
 
-  // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // if (!email.value.trim() || !emailRegex.test(email.value)) {
-  //   alert("Please enter a valid email address");
-  //   email.focus();
-  //   return;
-  // }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value.trim() || !emailRegex.test(email.value)) {
+    alert("Please enter a valid email address");
+    email.focus();
+    return;
+  }
 
-  // const phoneRegex = /^0[5-7]\d{8}$/;
-  // if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
-  //   alert("Please enter a valid Moroccan phone number (10 digits starting with 05, 06, or 07)");
-  //   phone.focus();
-  //   return;
-  // }
+  const phoneRegex = /^0[5-7]\d{8}$/;
+  if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
+    alert("Please enter a valid Moroccan phone number (10 digits starting with 05, 06, or 07)");
+    phone.focus();
+    return;
+  }
 
   let employe = {
     FullName: fullName.value,
@@ -225,36 +225,36 @@ submit.addEventListener("click", (e) => {
     const dateDebut = e.querySelector("#start_date");
     const dateFin = e.querySelector("#end_date");
 
-    // if (!post.value.trim()) {
-    //   alert("Please fill in the previous post for all experiences");
-    //   post.focus();
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (!post.value.trim()) {
+      alert("Please fill in the previous post for all experiences");
+      post.focus();
+      allExpValid = false;
+      return;
+    }
 
-    // if (!entreprise.value.trim()) {
-    //   alert("Please fill in the previous company for all experiences");
-    //   entreprise.focus();
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (!entreprise.value.trim()) {
+      alert("Please fill in the previous company for all experiences");
+      entreprise.focus();
+      allExpValid = false;
+      return;
+    }
 
-    // if (!dateDebut.value || !dateFin.value) {
-    //   alert("Please fill in both start and end dates for all experiences");
-    //   dateDebut.focus();
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (!dateDebut.value || !dateFin.value) {
+      alert("Please fill in both start and end dates for all experiences");
+      dateDebut.focus();
+      allExpValid = false;
+      return;
+    }
 
-    // const startDate = new Date(dateDebut.value);
-    // const endDate = new Date(dateFin.value);
+    const startDate = new Date(dateDebut.value);
+    const endDate = new Date(dateFin.value);
 
-    // if (startDate >= endDate) {
-    //   alert("Start date must be before end date in all experiences");
-    //   dateDebut.focus();
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (startDate >= endDate) {
+      alert("Start date must be before end date in all experiences");
+      dateDebut.focus();
+      allExpValid = false;
+      return;
+    }
 
     // Only add experience if valid
     let exp = {
@@ -267,9 +267,9 @@ submit.addEventListener("click", (e) => {
   });
 
   // Stop if any experience was invalid
-  // if (!allExpValid) {
-  //   return;
-  // }
+  if (!allExpValid) {
+    return;
+  }
 
   employees.push(employe);
   createSidebarCard(employe, employees.length - 1);
