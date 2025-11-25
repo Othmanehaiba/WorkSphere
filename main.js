@@ -173,6 +173,29 @@ function showEmployeeDetails(id) {
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
+  
+  if (!fullName.value.trim()) {
+    alert("Please enter a full name");
+    return;
+  }
+
+  const nameRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
+  if (!nameRegex.test(fullName.value)) {
+    alert("Full name can only contain letters, spaces, and hyphens");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value.trim() || !emailRegex.test(email.value)) {
+    alert("Please enter a valid email address");
+    return;
+  }
+
+  const phoneRegex = /^0[5-7]\d{8}$/;
+  if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
+    alert("Please enter a valid Moroccan phone number (10 digits starting with 05, 06, or 07)");
+    return;
+  }
 
   let employe = {
     FullName: fullName.value,
@@ -190,6 +213,33 @@ submit.addEventListener("click", (e) => {
     const entreprise = e.querySelector("#entreprise");
     const dateDebut = e.querySelector("#start_date");
     const dateFin = e.querySelector("#end_date");
+
+    if (!post.value.trim()) {
+      alert("Please fill in the previous post for all experiences");
+      experienceValid = false;
+      return;
+    }
+
+    if (!entreprise.value.trim()) {
+      alert("Please fill in the previous company for all experiences");
+      experienceValid = false;
+      return;
+    }
+
+    if (!dateDebut.value || !dateFin.value) {
+      alert("Please fill in both start and end dates for all experiences");
+      experienceValid = false;
+      return;
+    }
+
+    const startDate = new Date(dateDebut.value);
+    const endDate = new Date(dateFin.value);
+
+    if (startDate >= endDate) {
+      alert("Start date must be before end date in all experiences");
+      experienceValid = false;
+      return;
+    }
 
     exp.PPost = post.value;
     exp.PEntreprise = entreprise.value;
@@ -249,7 +299,7 @@ function isAvaileble(availble, room, roomName) {
         <img
               src="${fil.PicURL || 'image/d97bbb08017ac2309307f0822e63d082.jpg'}"
               alt="user_by_default"
-              class="rounded-full"
+              class="rounded-full w-[20%] h-[20%]"
             />
           <div>
           <h3 class="text-2xl">${fil.FullName}</h3> 
