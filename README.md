@@ -35,8 +35,7 @@ L'application offre une interface intuitive pour visualiser, organiser et gérer
 - *Techniciens IT* : Salle des serveurs  
 - *Agents de sécurité* : Salle de sécurité  
 - *Manager* : Accès à toutes les zones  
-- *Nettoyage* : Partout sauf Salle d’archives  
-- *Autres rôles* : Accès libre sauf zones restreintes  
+- *Nettoyage* : Partout sauf Salle d’archives   
 
 ---
 
@@ -50,8 +49,8 @@ L'application offre une interface intuitive pour visualiser, organiser et gérer
 ---
 
 ## Validation des Données
-- Nom : 3 à 10 lettres  
-- Téléphone : Format marocain (+212 ou 0) suivi de 6/7 + 8 chiffres  
+- Nom : Contient tout les lettres plus un espace
+- Téléphone : Format marocain (06 / 07 ou 05) suivi de 8 chiffres  
 - Email : Format classique (exemple@domaine.com)  
 - Dates : Date de début < date de fin  
 
@@ -59,17 +58,8 @@ L'application offre une interface intuitive pour visualiser, organiser et gérer
 
 ## Interface Utilisateur
 - Design moderne et cohérent  
-- Animations CSS fluides  
-- Notifications toast pour actions  
-- Interface responsive (mobile → desktop)  
-
----
-
-## Breakpoints Responsive
-- *Mobile* : ≤ 767px  
-- *Tablette Portrait* : 768–1023px  
-- *Tablette Paysage* : 1024–1279px  
-- *Desktop* : ≥ 1280px  
+- Animations CSS fluides   
+- Interface responsive 
 
 ---
 
@@ -89,7 +79,7 @@ Méthodologie *Agile* avec :
 ---
 
 ## Déploiement
-Application déployée sur *GitHub Pages*.
+Application déployée sur *Vercel*.
 
 ---
 
@@ -101,9 +91,6 @@ Application déployée sur *GitHub Pages*.
 - Réorganisation automatique  
 - Photos de profil par défaut  
 
----
 
-## Informations
-- *Date de développement* : 14/11/2025 → 21/11/2025  
-- *Durée* : 5 jours  
-- *Version* : 1.0.0
+
+
