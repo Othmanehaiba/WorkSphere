@@ -217,36 +217,36 @@ submit.addEventListener("click", (e) => {
     const dateDebut = e.querySelector("#start_date");
     const dateFin = e.querySelector("#end_date");
 
-    // if (!post.value.trim()) {
-    //   alert("Please fill in the previous post for all experiences");
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (!post.value.trim()) {
+      alert("Please fill in the previous post for all experiences");
+      allExpValid = false;
+      return;
+    }
 
-    // if (!entreprise.value.trim()) {
-    //   alert("Please fill in the previous company for all experiences");
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (!entreprise.value.trim()) {
+      alert("Please fill in the previous company for all experiences");
+      allExpValid = false;
+      return;
+    }
 
-    // if (!dateDebut.value || !dateFin.value) {
-    //   alert("Please fill in both start and end dates for all experiences");
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (!dateDebut.value || !dateFin.value) {
+      alert("Please fill in both start and end dates for all experiences");
+      allExpValid = false;
+      return;
+    }
 
-    // const startDate = new Date(dateDebut.value);
-    // const endDate = new Date(dateFin.value);
+    const startDate = new Date(dateDebut.value);
+    const endDate = new Date(dateFin.value);
 
-    // if (startDate >= endDate) {
-    //   alert("Start date must be before end date in all experiences");j
-    //   allExpValid = false;
-    //   return;
-    // }
+    if (startDate >= endDate) {
+      alert("Start date must be before end date in all experiences");j
+      allExpValid = false;
+      return;
+    }
 
-    // if (!allExpValid) {
-    //   return;
-    // }
+    if (!allExpValid) {
+      return;
+    }
    
     let exp = {
       PPost: post.value,
