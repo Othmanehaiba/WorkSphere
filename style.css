@@ -30,5 +30,8 @@
 form{
   scrollbar-width: none
 }
+aside{
+  scrollbar-width: none
+}
 
 @import "tailwindcss" ;

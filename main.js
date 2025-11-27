@@ -30,13 +30,17 @@ picture.addEventListener("input", () => {
   const img = document.querySelector("#realPic");
   if (!picture.value) {
     img.src = "image/d97bbb08017ac2309307f0822e63d082.jpg";
-  } else {
+  }else {
     img.src = picture.value;
   }
 });
 
 btnAddWorker.addEventListener("click", () => {
   pop_up.classList.remove("hidden");
+  /////////////////////////////////////////
+  
+  newInp.className = "w-full px-4 py-2 rounded bg-zinc-600 text-white"
+  form.appendChild(newInp)
 });
 
 closePopUp.addEventListener("click", () => {
@@ -74,7 +78,6 @@ btnAddExperience.addEventListener("click", (e) => {
             class="px-4 py-2 rounded bg-zinc-600 text-white w-auto mx-[25%]"
             type="text"
             id="entreprise"
-            value=" microsoft "
             placeholder="Ex: Microsoft "
             />
             <label class="block text-white mt-2 mx-[25%]" for="tele"
@@ -97,35 +100,34 @@ btnAddExperience.addEventListener("click", (e) => {
                       </div>`;
 });
 
-exps.addEventListener("click", (event) => {
-  const rmv = event.target.closest("#deleteExp");
+exps.addEventListener("click", (e) => {
+  const rmv = e.target.closest("#deleteExp");
   if (rmv) {
     rmv.parentElement.remove();
   }
 });
 
-function createSidebarCard(employee, index) {
+function createSidebarCard(employees, index) {
   const container_cards = document.querySelector(".container_cards");
   const card = document.createElement("div");
-  card.className = "card flex mx-4 rounded mb-4 mt-2 bg-gray-400"
+  card.className = "card flex mx-4 rounded mb-4 mt-2 bg-gray-400";
   card.dataset.id = index;
   card.innerHTML = `
-        
         <img
               src="${
-                employee.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
+                employees.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
               }"
               alt="user_by_default"
               class="rounded-full w-20 h-20"
             />
           <div>
-          <h3 class="text-2xl">${employee.FullName}</h3> 
-          <h4>${employee.Role}</h4>
+          <h3 class="text-2xl">${employees.FullName}</h3> 
+          <h4>${employees.Role}</h4>
           </div>  
         `;
 
   card.addEventListener("click", (e) => {
-    const id = e.target.closest(".card").dataset.id;
+    const id = e.currentTarget.dataset.id;
     showEmployeeDetails(id);
   });
 
@@ -154,7 +156,7 @@ function showEmployeeDetails(id) {
     <h4 class="font-bold">Experiences Profesionnel:</h4>
   `;
 
-  // Add experiences if any
+  
   employees[id].Experiences.forEach((exp, indx) => {
     const expDiv = document.createElement("div");
     expDiv.className = "mb-2";
@@ -177,33 +179,24 @@ function showEmployeeDetails(id) {
 submit.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (!fullName.value.trim()) {
-    alert("Please enter a full name");
-    fullName.focus();
-    return;
-  }
-
   const nameRegex = /^[a-zA-ZÀ-ÿ\s-]+$/;
-  if (!nameRegex.test(fullName.value)) {
+  if (!fullName.value.trim() || !nameRegex.test(fullName.value)) {
     alert("Full name can only contain letters, spaces, and hyphens");
-    fullName.focus();
     return;
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email.value.trim() || !emailRegex.test(email.value)) {
     alert("Please enter a valid email address");
-    email.focus();
     return;
   }
 
   const phoneRegex = /^0[5-7]\d{8}$/;
   if (!phone.value.trim() || !phoneRegex.test(phone.value)) {
     alert("Please enter a valid Moroccan phone number (10 digits starting with 05, 06, or 07)");
-    phone.focus();
     return;
   }
-
+  
   let employe = {
     FullName: fullName.value,
     Role: role.value,
@@ -214,68 +207,62 @@ submit.addEventListener("click", (e) => {
     currRoom: "unasigned",
   };
 
-  // Flag to track if ALL experiences are valid
   let allExpValid = true;
 
   document.querySelectorAll(".exp").forEach((e) => {
-    if (!allExpValid) return; // Skip if already failed
+    if (!allExpValid) return; 
 
     const post = e.querySelector("#post");
     const entreprise = e.querySelector("#entreprise");
     const dateDebut = e.querySelector("#start_date");
     const dateFin = e.querySelector("#end_date");
 
-    if (!post.value.trim()) {
-      alert("Please fill in the previous post for all experiences");
-      post.focus();
-      allExpValid = false;
-      return;
-    }
+    // if (!post.value.trim()) {
+    //   alert("Please fill in the previous post for all experiences");
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    if (!entreprise.value.trim()) {
-      alert("Please fill in the previous company for all experiences");
-      entreprise.focus();
-      allExpValid = false;
-      return;
-    }
+    // if (!entreprise.value.trim()) {
+    //   alert("Please fill in the previous company for all experiences");
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    if (!dateDebut.value || !dateFin.value) {
-      alert("Please fill in both start and end dates for all experiences");
-      dateDebut.focus();
-      allExpValid = false;
-      return;
-    }
+    // if (!dateDebut.value || !dateFin.value) {
+    //   alert("Please fill in both start and end dates for all experiences");
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    const startDate = new Date(dateDebut.value);
-    const endDate = new Date(dateFin.value);
+    // const startDate = new Date(dateDebut.value);
+    // const endDate = new Date(dateFin.value);
 
-    if (startDate >= endDate) {
-      alert("Start date must be before end date in all experiences");
-      dateDebut.focus();
-      allExpValid = false;
-      return;
-    }
+    // if (startDate >= endDate) {
+    //   alert("Start date must be before end date in all experiences");j
+    //   allExpValid = false;
+    //   return;
+    // }
 
-    // Only add experience if valid
+    // if (!allExpValid) {
+    //   return;
+    // }
+   
     let exp = {
       PPost: post.value,
-      PEntreprise: entreprise.value,
+      PCompany: entreprise.value,
       SDate: dateDebut.value,
-      Edate: dateFin.value,
+      EDate: dateFin.value,
     };
     employe.Experiences.push(exp);
   });
 
-  // Stop if any experience was invalid
-  if (!allExpValid) {
-    return;
-  }
 
   employees.push(employe);
   createSidebarCard(employe, employees.length - 1);
   pop_up.classList.add("hidden");
   form.reset();
-  exps.innerHTML = ""; // Clear experiences
+  exps.innerHTML = ""; 
 });
 
 function filterArray(paravailableEmployees, role) {
@@ -288,42 +275,42 @@ function filterArray(paravailableEmployees, role) {
   return avEmployes;
 }
 
-function isAvaileble(availble, room, roomName) {
+function isAvaileble(employees, roomName) {
   staffContainer.innerHTML = ``;
   let filtredArray = [];
 
-  if (room === "conf" || room === "pers") {
-    filtredArray.push(...availble);
+  if (roomName === "conference" || roomName === "personel") {
+    filtredArray.push(...employees);
   }
-  if (room === "ser") {
-    filtredArray = filterArray(availble, "Techniciens IT");
-    filtredArray.push(...filterArray(availble, "Manager"));
-    filtredArray.push(...filterArray(availble, "Nettoyage"));
+  if (roomName === "serveurs") {
+    filtredArray = filterArray(employees, "Techniciens IT");
+    filtredArray.push(...filterArray(employees, "Manager"));
+    filtredArray.push(...filterArray(employees, "Nettoyage"));
   }
-  if (room === "sec") {
-    filtredArray = filterArray(availble, "Agents de sécurité");
-    filtredArray.push(...filterArray(availble, "Manager"));
-    filtredArray.push(...filterArray(availble, "Nettoyage"));
+  if (roomName === "security") {
+    filtredArray = filterArray(employees, "Agents de sécurité");
+    filtredArray.push(...filterArray(employees, "Manager"));
+    filtredArray.push(...filterArray(employees, "Nettoyage"));
   }
-  if (room === "res") {
-    filtredArray = filterArray(availble, "Réceptionnistes");
-    filtredArray.push(...filterArray(availble, "Manager"));
-    filtredArray.push(...filterArray(availble, "Nettoyage"));
+  if (roomName === "reception") {
+    filtredArray = filterArray(employees, "Réceptionnistes");
+    filtredArray.push(...filterArray(employees, "Manager"));
+    filtredArray.push(...filterArray(employees, "Nettoyage"));
   }
-  if (room === "arch") {
-    filtredArray = filterArray(availble, "Manager");
+  if (roomName === "archive") {
+    filtredArray = filterArray(employees, "Manager");
   }
 
   filtredArray.forEach((fil) => {
     const showUnassigned = document.createElement("div");
     showUnassigned.className =
-      "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400";
+      "card-info flex mx-4 rounded mb-4 mt-2 bg-gray-400 cursor-pointer";
     showUnassigned.innerHTML = `
         <img
               src="${
                 fil.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"
               }"
-              alt="user_by_default"
+              alt="profile_pic"
               class="rounded-full w-[20%] h-[20%]"
             />
           <div>
@@ -335,12 +322,13 @@ function isAvaileble(availble, room, roomName) {
     staffContainer.append(showUnassigned);
     showUnassigned.addEventListener("click", () => {
       const EmpToChamber = document.createElement("div");
-      EmpToChamber.className = "employe relative bg-white p-2 rounded shadow-md mb-2";
+      EmpToChamber.className =
+        "employe relative bg-white p-2 rounded shadow-md mb-2 cursor-pointer";
       const empIndex = employees.indexOf(fil);
       EmpToChamber.dataset.id = empIndex;
       EmpToChamber.innerHTML = `
-    <button class="deleteBtn absolute top-1 right-1 text-red-500 font-bold text-xl hover:text-red-700">X</button>
-    <div class="flex items-center gap-2 employee-card-chamber cursor-pointer">
+    <button class="deleteBtn absolute top-1 right-1 text-red-500 font-bold text-xl hover:text-red-700 cursor-pointer">X</button>
+    <div class="flex items-center gap-2 employee-card-chamber">
       <img
         src="${fil.PicURL || "image/d97bbb08017ac2309307f0822e63d082.jpg"}"
         alt="user_by_default"
@@ -352,21 +340,14 @@ function isAvaileble(availble, room, roomName) {
       </div>
     </div>
       `;
-      document.querySelector('.'+roomName).append(EmpToChamber);
-      // staffContainer.classList.add("hidden")
+      document.querySelector("." + roomName).append(EmpToChamber);
 
-      // Add click event to show details for chamber employee
-      EmpToChamber.querySelector(".employee-card-chamber").addEventListener(
-        "click",
-        () => {
+      EmpToChamber.querySelector(".employee-card-chamber").addEventListener("click",() => {
           showEmployeeDetails(empIndex);
-        }
-      );
+        });
 
-      // Update employee room status
       fil.currRoom = roomName;
-
-      // Remove from sidebar
+  
       const sidebarCard = document.querySelector(
         `.card[data-id="${empIndex}"]`
       );
@@ -374,16 +355,12 @@ function isAvaileble(availble, room, roomName) {
         sidebarCard.remove();
       }
 
-      showUnassigned.remove();
-
       listAvelaible.classList.add("hidden");
 
-      // Delete button - return employee to sidebar
       EmpToChamber.querySelector(".deleteBtn").addEventListener("click", () => {
         EmpToChamber.remove();
         fil.currRoom = "unasigned";
 
-        // Re-add to sidebar
         createSidebarCard(fil, empIndex);
       });
     });
@@ -412,11 +389,11 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("conférence")) {
       if (document.querySelector(".conference").children.length - 1 < 4) {
-        isAvaileble(availble, "conf", "conference");
+        isAvaileble(availble, "conference");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
-          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold";
         fullRoom.textContent = "This room is full (max 4 employees)";
         document.body.append(fullRoom);
         setTimeout(() => {
@@ -426,11 +403,11 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("serveurs")) {
       if (document.querySelector(".serveurs").children.length - 1 < 4) {
-        isAvaileble(availble, "ser", ".serveurs");
+        isAvaileble(availble, "serveurs");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
-          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold";
         fullRoom.textContent = "This room is full (max 4 employees)";
         document.body.append(fullRoom);
         setTimeout(() => {
@@ -440,11 +417,11 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("security")) {
       if (document.querySelector(".security").children.length - 1 < 4) {
-        isAvaileble(availble, "sec", "security");
+        isAvaileble(availble, "security");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
-          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold";
         fullRoom.textContent = "This room is full (max 4 employees)";
         document.body.append(fullRoom);
         setTimeout(() => {
@@ -454,12 +431,12 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("reception")) {
       if (document.querySelector(".reception").children.length - 1 < 8) {
-        isAvaileble(availble, "res", "reception");
+        isAvaileble(availble, "reception");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
-          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
-        fullRoom.textContent = "This room is full (max 10 employees)";
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold";
+        fullRoom.textContent = "This room is full (max 8 employees)";
         document.body.append(fullRoom);
         setTimeout(() => {
           fullRoom.remove();
@@ -468,11 +445,11 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("personel")) {
       if (document.querySelector(".personel").children.length - 1 < 4) {
-        isAvaileble(availble, "pers", "personel");
+        isAvaileble(availble, "personel");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
-          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold";
         fullRoom.textContent = "This room is full (max 4 employees)";
         document.body.append(fullRoom);
         setTimeout(() => {
@@ -482,12 +459,12 @@ btnAddToChamber.forEach((add) => {
     }
     if (add.classList.contains("archive")) {
       if (document.querySelector(".archive").children.length - 1 < 4) {
-        isAvaileble(availble, "arch", "archive");
+        isAvaileble(availble, "archive");
       } else {
         const fullRoom = document.createElement("div");
         fullRoom.className =
-          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold animate-bounce";
-        fullRoom.textContent = "This room is full (max 2 employees)";
+          "msg-no-worker text-red-600 bg-red-100 absolute right-0 bottom-0 mb-14 mr-5 p-3 rounded-md shadow-red-600 shadow-lg text-center font-semibold";
+        fullRoom.textContent = "This room is full (max 4 employees)";
         document.body.append(fullRoom);
         setTimeout(() => {
           fullRoom.remove();
